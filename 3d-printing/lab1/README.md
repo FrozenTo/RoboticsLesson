@@ -28,6 +28,22 @@ Arenduskeskkond: Visual Studio / Visual Studio Code
 
 AI-tööriistad: Codex ja ChatGPT
 
+### Kuup
+
+lõtk - 0.1mm (parem oleks kui vähemalt 0.2)
+kõrgus - 1 cm
+pikkus - 5 cm
+Materjal - ?
+
+### Pastakahoidja mõõdud
+
+Painduv osa: paksus - 2mm (vähemalt 1mm, vähem - läheb katki), pikkus - 3cm
+
+silinder (kinnitus mg400 külge): kõrgus - 6mm, raadius - 2cm
+
+4 auku kruvide jaoks: raadius - 1.5mm, kaugus tsentrist - 12mm?
+
+pastaka auk: diameeter all - 8.6mm, üleval 8.8mm, augu kõrgus - 6mm
 
 # 3D printimine ja CAD: Labor 1 — Printer, ja tööriist, mis annab järele
 

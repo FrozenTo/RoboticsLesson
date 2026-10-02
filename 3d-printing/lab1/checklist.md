@@ -23,74 +23,74 @@ Esimene kuup, mis oli välja prinditud, oli silindriga kinni jäänud ja jäi ü
 - [O] Ekspordi STL.
 - [O] Tee PrusaSliceris `.3mf`.
 - [O] Prindi esimene lõtkuvariant.
-- [ ] Kontrolli, kas silinder:
-  - [ ] on täiesti kinni;
-  - [ ] liigub suure jõuga;
-  - [ ] liigub normaalselt;
-  - [ ] pöörleb vabalt.
-- [ ] Vajadusel muuda lõtku ja prindi uus variant.
-- [ ] Leia väikseim lõtk, millega silinder liigub.
-- [ ] Leia lõtk, mille juures detail veel kinni sulab.
-- [ ] Pane kõik testitud lõtkuväärtused README-sse mm-des.
-- [ ] Pane kirja kasutatud printer.
-- [ ] Pane kirja kasutatud materjal.
-- [ ] Pane kirja olulised sliceri seaded.
-- [ ] Salvesta iga prinditud variandi STL ja `.3mf`.
+- [O] Kontrolli, kas silinder:
+  - [O] on täiesti kinni;
+  - [O] liigub suure jõuga;
+  - [O] liigub normaalselt;
+  - [O] pöörleb vabalt.
+- [O] Vajadusel muuda lõtku ja prindi uus variant.
+- [O] Leia väikseim lõtk, millega silinder liigub.
+- [O] Leia lõtk, mille juures detail veel kinni sulab.
+- [O] Pane kõik testitud lõtkuväärtused README-sse mm-des.
+- [O] Pane kirja kasutatud printer.
+- [O] Pane kirja kasutatud materjal.
+- [O] Pane kirja olulised sliceri seaded.
+- [O] Salvesta iga prinditud variandi STL ja `.3mf`.
 
 ### Kuubi tulemus
 
-- [ ] Sobiv lõtk on teada.
-- [ ] Kinni sulamise piir on teada.
-- [ ] Mõlemad väärtused on README-s koos ühikutega.
+- [O] Sobiv lõtk on teada.
+- [0] Kinni sulamise piir on teada.
+- [0] Mõlemad väärtused on README-s koos ühikutega.
 
 ---
 
 ## 2. Paindlik tükk
 
-- [ ] Mõtle välja lihtne painduv testdetail.
-- [ ] Pane kirja detaili mõõdud:
-  - [ ] pikkus;
-  - [ ] laius;
-  - [ ] paksus.
-- [ ] Salvesta CAD lähtefail.
-- [ ] Ekspordi STL.
-- [ ] Tee `.3mf`.
-- [ ] Prindi detail.
-- [ ] Testi, kui palju saab detaili painutada nii, et see tuleb tagasi.
-- [ ] Pane kirja elastse painde piir.
-- [ ] Painuta rohkem ja leia koht, kus detail jääb kõveraks.
-- [ ] Pane kirja plastilise painde piir.
-- [ ] Painuta kuni murdumiseni.
-- [ ] Pane kirja, kus ja kuidas detail murdus.
-- [ ] Märgi paine mm-des ja/või kraadides.
-- [ ] Tee vajadusel uus versioon.
-- [ ] Salvesta kõik versioonid eraldi failidena.
-- [ ] Kirjuta README-sse, mida igas versioonis muutsid ja miks.
+- [O] Mõtle välja lihtne painduv testdetail.
+- [O] Pane kirja detaili mõõdud:
+  - [O] pikkus;
+  - [O] laius;
+  - [O] paksus.
+- [O] Salvesta CAD lähtefail.
+- [O] Ekspordi STL.
+- [O] Tee `.3mf`.
+- [O] Prindi detail.
+- [O] Testi, kui palju saab detaili painutada nii, et see tuleb tagasi.
+- [O] Pane kirja elastse painde piir.
+- [O] Painuta rohkem ja leia koht, kus detail jääb kõveraks.
+- [O] Pane kirja plastilise painde piir.
+- [O] Painuta kuni murdumiseni.
+- [O] Pane kirja, kus ja kuidas detail murdus.
+- [O] Märgi paine mm-des ja/või kraadides.
+- [O] Tee vajadusel uus versioon.
+- [O] Salvesta kõik versioonid eraldi failidena.
+- [O] Kirjuta README-sse, mida igas versioonis muutsid ja miks.
 
 ### Paindliku tüki tulemus
 
-- [ ] Elastse painde piir on teada.
-- [ ] Plastilise painde piir on teada.
-- [ ] Murdumise koht/piir on teada.
-- [ ] Kõik tulemused on README-s koos ühikutega.
+- [O] Elastse painde piir on teada.
+- [O] Plastilise painde piir on teada.
+- [O] Murdumise koht/piir on teada.
+- [O] Kõik tulemused on README-s koos ühikutega.
 
 ---
 
 ## 3. Pastakahoidiku planeerimine
 
-- [ ] Vaata üle MG400 kinnitus/flants.
-- [ ] Ava antud MG400 mount Fusion 360 fail.
-- [ ] Mõõda kuulpastakas nihikuga.
-- [ ] Mõõda:
-  - [ ] pastaka läbimõõt;
-  - [ ] kinnituseks vajalik pikkus;
-  - [ ] pastaka otsa asukoht;
-  - [ ] MG400 kinnituse vajalikud mõõdud.
-- [ ] Otsusta, kuidas pastakas hoidikusse kinnitub.
-- [ ] Otsusta, kuidas hoidik Z-suunas järele annab.
-- [ ] Kasuta kuubi testist saadud lõtku.
-- [ ] Kasuta painduva detaili testist saadud tulemusi.
-- [ ] Tee esimene CAD-versioon.
+- [O] Vaata üle MG400 kinnitus/flants.
+- [O] Ava antud MG400 mount Fusion 360 fail.
+- [O] Mõõda kuulpastakas nihikuga.
+- [O] Mõõda:
+  - [O] pastaka läbimõõt;
+  - [O] kinnituseks vajalik pikkus;
+  - [O] pastaka otsa asukoht;
+  - [O] MG400 kinnituse vajalikud mõõdud.
+- [O] Otsusta, kuidas pastakas hoidikusse kinnitub.
+- [O] Otsusta, kuidas hoidik Z-suunas järele annab.
+- [O] Kasuta kuubi testist saadud lõtku.
+- [O] Kasuta painduva detaili testist saadud tulemusi.
+- [O] Tee esimene CAD-versioon.
 
 ---
 
@@ -98,51 +98,51 @@ Esimene kuup, mis oli välja prinditud, oli silindriga kinni jäänud ja jäi ü
 
 ### v01
 
-- [ ] Salvesta fail nimega näiteks `pen_holder_v01`.
-- [ ] Ekspordi STL.
-- [ ] Tee `.3mf`.
-- [ ] Prindi.
-- [ ] Kontrolli, kas pastakas mahub hoidikusse.
-- [ ] Kontrolli, kas hoidik sobib MG400 külge.
-- [ ] Kontrolli, kas painduv osa annab Z-suunas järele.
-- [ ] Kontrolli, kas hoidik tuleb pärast vajutamist tagasi algasendisse.
-- [ ] Pane kirja probleemid.
-- [ ] Pane kirja, mida järgmises versioonis muuta.
+- [O] Salvesta fail nimega näiteks `pen_holder_v01`.
+- [O] Ekspordi STL.
+- [O] Tee `.3mf`.
+- [O] Prindi.
+- [O] Kontrolli, kas pastakas mahub hoidikusse.
+- [O] Kontrolli, kas hoidik sobib MG400 külge.
+- [O] Kontrolli, kas painduv osa annab Z-suunas järele.
+- [O] Kontrolli, kas hoidik tuleb pärast vajutamist tagasi algasendisse.
+- [O] Pane kirja probleemid.
+- [O] Pane kirja, mida järgmises versioonis muuta.
 
 ### Järgmised versioonid
 
-- [ ] Tee `v02`.
-- [ ] Dokumenteeri, mis muutus ja miks.
-- [ ] Tee vajadusel `v03`, `v04` jne.
-- [ ] Ära kirjuta vanu versioone üle.
-- [ ] Säilita iga versiooni lähtefail.
-- [ ] Säilita iga prinditud versiooni STL.
-- [ ] Säilita iga prinditud versiooni `.3mf`.
-- [ ] Testi umbes mõnemillimeetrist Z-viga.
-- [ ] Veendu, et pastakas jääb terveks.
-- [ ] Veendu, et joon jääb paberile.
+- [O] Tee `v02`.
+- [O] Dokumenteeri, mis muutus ja miks.
+- [O] Tee vajadusel `v03`, `v04` jne.
+- [O] Ära kirjuta vanu versioone üle.
+- [O] Säilita iga versiooni lähtefail.
+- [O] Säilita iga prinditud versiooni STL.
+- [O] Säilita iga prinditud versiooni `.3mf`.
+- [O] Testi umbes mõnemillimeetrist Z-viga.
+- [O] Veendu, et pastakas jääb terveks.
+- [O] Veendu, et joon jääb paberile.
 
 ### Pastakahoidiku lõpptulemus
 
-- [ ] Pastakas püsib kindlalt hoidikus.
-- [ ] Hoidik kinnitub kindlalt MG400 külge.
-- [ ] Hoidik annab Z-suunas järele.
-- [ ] Hoidik taastab pärast vajutamist oma asendi.
-- [ ] Väike Z-kõrguse viga ei riku pastakat ega joonistamist.
+- [O] Pastakas püsib kindlalt hoidikus.
+- [O] Hoidik kinnitub kindlalt MG400 külge.
+- [O] Hoidik annab Z-suunas järele.
+- [O] Hoidik taastab pärast vajutamist oma asendi.
+- [O] Väike Z-kõrguse viga ei riku pastakat ega joonistamist.
 
 ---
 
 ## 5. MG400 test
 
-- [ ] Kinnita hoidik MG400 külge.
-- [ ] Pane paber tööalale.
-- [ ] Kinnita paber vajadusel maalriteibiga.
-- [ ] Hoia hädastopp käeulatuses.
-- [ ] Tee esimene robotijooks väikese kiirusega.
-- [ ] Õpeta/kinnita kirjutamise Z-kõrgus.
-- [ ] Kontrolli, et hoidiku painduv osa kompenseeriks väikest Z-viga.
-- [ ] Kontrolli, et pastakale ei tuleks liiga suurt survet.
-- [ ] Pane robot joonistama üks lihtne täht.
+- [O] Kinnita hoidik MG400 külge.
+- [O] Pane paber tööalale.
+- [O] Kinnita paber vajadusel maalriteibiga.
+- [O] Hoia hädastopp käeulatuses.
+- [O] Tee esimene robotijooks väikese kiirusega.
+- [O] Õpeta/kinnita kirjutamise Z-kõrgus.
+- [O] Kontrolli, et hoidiku painduv osa kompenseeriks väikest Z-viga.
+- [O] Kontrolli, et pastakale ei tuleks liiga suurt survet.
+- [O] Pane robot joonistama üks lihtne täht.
 
 ---
 
@@ -177,15 +177,15 @@ Esimene kuup, mis oli välja prinditud, oli silindriga kinni jäänud ja jäi ü
 
 Iga töösessiooni järel:
 
-- [ ] Lisa kuupäev.
-- [ ] Lisa kohal olnud meeskonnaliikmed.
-- [ ] Kirjuta, mida tegite.
-- [ ] Kirjuta mõõdetud numbrid koos ühikutega.
-- [ ] Kirjuta, mis juhtus.
-- [ ] Kirjuta, mida otsustasite.
-- [ ] Kirjuta, miks nii otsustasite.
-- [ ] Kirjuta, mis jäi järgmiseks korraks.
-- [ ] Ära muuda vanu päevikusissekandeid — lisa uus sissekanne.
+- [O] Lisa kuupäev.
+- [O] Lisa kohal olnud meeskonnaliikmed.
+- [O] Kirjuta, mida tegite.
+- [O] Kirjuta mõõdetud numbrid koos ühikutega.
+- [O] Kirjuta, mis juhtus.
+- [O] Kirjuta, mida otsustasite.
+- [O] Kirjuta, miks nii otsustasite.
+- [O] Kirjuta, mis jäi järgmiseks korraks.
+- [O] Ära muuda vanu päevikusissekandeid — lisa uus sissekanne.
 
 Soovituslik vorm:
 
