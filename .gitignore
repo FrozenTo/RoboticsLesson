@@ -3,3 +3,4 @@ __pycache__/
 *.py[cod]
 .tmp/
 .pio/
+MG400 python apps/letter_cursor.json

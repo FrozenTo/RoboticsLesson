@@ -7,7 +7,7 @@ PlatformIO project converted from the original Arduino sketch.
 - Sensor: MPX5700AP absolute pressure sensor
 - Board: M5Stack AtomS3
 - Sensor input: GPIO5
-- Serial monitor: COM6 at 115200 baud
+- Serial monitor: COM4 at 115200 baud as detected on 03.10.2026 (the port may change)
 - Sensor supply used for conversion: 5.06 V
 
 The project uses PlatformIO board ID `m5stack-atoms3`.
@@ -15,15 +15,21 @@ The project uses PlatformIO board ID `m5stack-atoms3`.
 ## Commands
 
 ```powershell
-.\.venv\Scripts\platformio.exe run -d Nutilahendused\sketch_sep12a
-.\.venv\Scripts\platformio.exe run -d Nutilahendused\sketch_sep12a -t upload
-.\.venv\Scripts\platformio.exe device monitor -d Nutilahendused\sketch_sep12a -p COM6 -b 115200
+.\mg400-base\.venv\Scripts\platformio.exe run -d .\RoboticsLesson\Nutilahendused\lab1\sketch_sep12a
+.\mg400-base\.venv\Scripts\platformio.exe run -d .\RoboticsLesson\Nutilahendused\lab1\sketch_sep12a -t upload
+.\mg400-base\.venv\Scripts\platformio.exe device monitor -d .\RoboticsLesson\Nutilahendused\lab1\sketch_sep12a -p COM4 -b 115200
 ```
+
+The firmware reports the selected symbol as `CHAR=<symbol>` and answers
+`GET_CHAR` over USB serial. A single click cycles the active set, a double click
+switches between A-Z and 0-9, and a long press sends `PRINT=<symbol>` without
+changing it. The selected letter, digit, and mode are saved in Preferences
+across reboots.
 
 To log serial output to a separate file:
 
 ```powershell
-.\.venv\Scripts\python.exe Nutilahendused\sketch_sep12a\tools\log_serial.py
+.\mg400-base\.venv\Scripts\python.exe .\RoboticsLesson\Nutilahendused\lab1\sketch_sep12a\tools\log_serial.py
 ```
 
 By default this writes a timestamped file under `Nutilahendused\sketch_sep12a\logs\`. Press `Ctrl+C` to stop logging.
@@ -31,7 +37,7 @@ By default this writes a timestamped file under `Nutilahendused\sketch_sep12a\lo
 To choose the filename or log for a fixed time:
 
 ```powershell
-.\.venv\Scripts\python.exe Nutilahendused\sketch_sep12a\tools\log_serial.py --output pressure.log --duration 60
+.\mg400-base\.venv\Scripts\python.exe .\RoboticsLesson\Nutilahendused\lab1\sketch_sep12a\tools\log_serial.py --port COM4 --output pressure.log --duration 60
 ```
 
 At normal room air pressure, `P_abs` should usually be around `101 kPa`, depending on weather and altitude. `P_gauge` should be close to `0 kPa` after startup because the startup sample is used as the local atmospheric reference.

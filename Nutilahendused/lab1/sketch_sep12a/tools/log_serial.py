@@ -8,7 +8,7 @@ import serial
 from serial import SerialException
 
 
-DEFAULT_PORT = "COM6"
+DEFAULT_PORT = "COM4"
 DEFAULT_BAUD = 115200
 
 
@@ -22,7 +22,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Log AtomS3 pressure readings from the serial port."
     )
-    parser.add_argument("--port", default=DEFAULT_PORT, help="Serial port, e.g. COM6.")
+    parser.add_argument("--port", default=DEFAULT_PORT, help="Serial port, e.g. COM4.")
     parser.add_argument("--baud", type=int, default=DEFAULT_BAUD, help="Serial baud rate.")
     parser.add_argument(
         "--output",

@@ -1,0 +1,13 @@
+{
+  "name": "paper_start_pen_tip",
+  "coordinate_frame": "MG400 base paper frame; X/Y are pen-tip coordinates",
+  "units": "mm and degrees",
+  "pose": {
+    "x": 261.51,
+    "y": -153.01,
+    "z": -188.0,
+    "r": -162.37
+  },
+  "recorded": "2026-10-03",
+  "note": "User-designated default pen-tip paper corner. Paper width runs +Y for 260 mm; height runs +X for 123 mm. Contact plane Z=-198 mm; saved Z is lifted."
+}

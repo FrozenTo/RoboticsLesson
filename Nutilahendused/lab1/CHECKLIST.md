@@ -171,8 +171,8 @@ Robot peab tõstma detaili allikast valmis pessa 10 korda järjest.
 - [ ] Kontrolli board: `m5stack-atoms3`
 - [ ] Kontrolli M5Unified kasutamist
 - [ ] Ühenda AtomS3 USB-C-ga
-- [ ] Buildi projekt
-- [ ] Laadi firmware AtomS3-le
+- [O] Buildi projekt
+- [O] Laadi firmware AtomS3-le
 - [ ] Ava Serial Monitor
 - [ ] Sea Serial Monitor kiiruseks `115200`
 - [ ] Kontrolli, et AtomS3 käivitub õigesti

@@ -13,24 +13,29 @@ This file is intentionally separate from:
     mg400_writer.py
     mg400_writer_app.py
 
-Expected workflow:
-1) Put your SVG path into SVG_FILE
-2) Test with:
-       LIVE_ROBOT = True
-       PREFLIGHT_ONLY = True
-3) If preflight succeeds:
-       PREFLIGHT_ONLY = False
+Workflow:
+1) Run without arguments for the offline SVG and paper-bounds preview.
+2) Run with --live for a physical pen-up preflight (disconnect the web page first).
+3) Add --draw only after the preflight succeeds; the script asks for the selected
+    Atom letter before lowering the pen.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 import math
+import argparse
+import json
 import re
 import xml.etree.ElementTree as ET
+from pathlib import Path
+import tempfile
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from urllib.error import URLError
+from urllib.request import urlopen
 
-from mg400_writer import MG400Writer
+from atom_letter import GLYPH_STROKES, read_atom_character, wait_for_print_signal, write_character_svg
+from mg400_svg_writer import MG400Writer
 
 
 Point2D = Tuple[float, float]
@@ -42,11 +47,9 @@ Polyline = List[Point2D]
 # ============================================================
 
 ROBOT_IP = "192.168.1.6"
-LIVE_ROBOT = True
-PREFLIGHT_ONLY = False
+LIVE_ROBOT = False
 
-# Update this later when you make a newer SVG.
-SVG_FILE = "C:\\Users\\user.NK-009\\Desktop\\drawing.svg"
+SVG_FILE = str(Path(__file__).with_name("letter_o.svg"))
 
 
 # ============================================================
@@ -66,11 +69,11 @@ PEN_ANGLE_OFFSET_DEG = 26.0
 # MEASURED PAPER / SAFE AREA
 # ============================================================
 
-PAPER_TOP_X = 260.0
-PAPER_BOTTOM_X = 383.0
+PAPER_TOP_X = 261.51
+PAPER_BOTTOM_X = 384.51
 
-PAPER_LEFT_Y = -123.0
-PAPER_RIGHT_Y = 137.0
+PAPER_LEFT_Y = -153.01
+PAPER_RIGHT_Y = 106.99
 
 PAPER_WIDTH_MM = PAPER_RIGHT_Y - PAPER_LEFT_Y
 PAPER_HEIGHT_MM = PAPER_BOTTOM_X - PAPER_TOP_X
@@ -80,8 +83,10 @@ PAPER_HEIGHT_MM = PAPER_BOTTOM_X - PAPER_TOP_X
 # DRAWING SETTINGS
 # ============================================================
 
-TEST_DRAWING_WIDTH_MM = 220.0
-TEST_DRAWING_HEIGHT_MM = 100.0
+TEST_DRAWING_WIDTH_MM = 20.0
+TEST_DRAWING_HEIGHT_MM = 20.0
+LETTER_ADVANCE_MM = 20.0
+CURSOR_STATE_FILE = Path(__file__).with_name("letter_cursor.json")
 
 # SVG cleanup / simplification
 MIN_PATH_LENGTH_MM = 2.5
@@ -95,6 +100,25 @@ ARC_TARGET_STEP_UNITS = 3.0
 MAX_SEGMENT_MM = 10.0
 
 PLAN_PROGRESS_EVERY = 20
+
+
+def max_right_offset_mm():
+    first_slot_right = PAPER_LEFT_Y + TEST_DRAWING_WIDTH_MM
+    return PAPER_RIGHT_Y - first_slot_right
+
+
+def load_next_right_offset(state_file=CURSOR_STATE_FILE):
+    if not state_file.exists():
+        return 0.0
+    saved = json.loads(state_file.read_text(encoding="utf-8"))
+    return float(saved["next_right_offset_mm"])
+
+
+def save_next_right_offset(offset_mm, state_file=CURSOR_STATE_FILE):
+    state_file.write_text(
+        json.dumps({"next_right_offset_mm": float(offset_mm)}, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
 
 # ============================================================
@@ -134,7 +158,7 @@ J4_MARGIN_DEG = 5.0
 J4_SAFE_MIN = J4_HARD_MIN + J4_MARGIN_DEG
 J4_SAFE_MAX = J4_HARD_MAX - J4_MARGIN_DEG
 
-WRITING_Z = -197.30
+WRITING_Z = -198.0
 
 
 # ============================================================
@@ -773,6 +797,7 @@ class DrawerSettings:
     travel_lift_mm: float = 10.0
     min_path_length_mm: float = MIN_PATH_LENGTH_MM
     simplify_tolerance_mm: float = SIMPLIFY_TOLERANCE_MM
+    right_offset_mm: float = 0.0
 
 
 # ============================================================
@@ -813,11 +838,8 @@ class MG400SVGDrawer:
     # ------------------------------------------------------------
 
     def test_area_origin(self) -> Tuple[float, float]:
-        left_margin = (PAPER_WIDTH_MM - self.settings.drawing_width_mm) / 2.0
-        top_margin = (PAPER_HEIGHT_MM - self.settings.drawing_height_mm) / 2.0
-
-        top_x = PAPER_TOP_X + top_margin
-        left_y = PAPER_LEFT_Y + left_margin
+        top_x = PAPER_TOP_X
+        left_y = PAPER_LEFT_Y + self.settings.right_offset_mm
         return top_x, left_y
 
     def load_scaled_svg_paths(self) -> List[Polyline]:
@@ -881,6 +903,23 @@ class MG400SVGDrawer:
                 continue
 
             scaled.append(transformed)
+
+        scaled_points = [point for path in scaled for point in path]
+        if scaled_points:
+            min_x = min(point[0] for point in scaled_points)
+            max_x = max(point[0] for point in scaled_points)
+            min_y = min(point[1] for point in scaled_points)
+            max_y = max(point[1] for point in scaled_points)
+            if (
+                min_x < PAPER_TOP_X
+                or max_x > PAPER_BOTTOM_X
+                or min_y < PAPER_LEFT_Y
+                or max_y > PAPER_RIGHT_Y
+            ):
+                raise ValueError(
+                    f"Letter exceeds the measured paper area: "
+                    f"X={min_x:.1f}..{max_x:.1f}, Y={min_y:.1f}..{max_y:.1f} mm"
+                )
 
         self.writer.log(
             f"Loaded SVG: {self.settings.svg_file}\n"
@@ -958,7 +997,7 @@ class MG400SVGDrawer:
         r_deg: float,
     ) -> Optional[Tuple[float, float, float, float]]:
         if not self.writer.settings.live_robot:
-            raise RuntimeError("InverseSolution planning requires LIVE_ROBOT=True")
+            raise RuntimeError("InverseSolution planning requires live_robot=True")
 
         key = (
             round(flange_x, 3),
@@ -1179,9 +1218,9 @@ class MG400SVGDrawer:
     # MOTION
     # ------------------------------------------------------------
 
-    def sync_motion(self) -> None:
+    def sync_motion(self, target_pose) -> None:
         if self.writer.settings.live_robot:
-            self.writer.send_motion("Sync()")
+            self.writer.wait_for_pose(target_pose)
 
     def move_flange_above_pen_tip(self, pen_x: float, pen_y: float, r_deg: float, lifted_z: float) -> None:
         flange_x, flange_y = self.flange_for_pen_tip(pen_x, pen_y, r_deg)
@@ -1203,6 +1242,18 @@ class MG400SVGDrawer:
         )
         self.writer.log(f"Pen remains lifted at Z={lifted_z:.2f}.")
 
+        current_pose = self.writer.get_current_pose()
+        if len(current_pose) < 4:
+            raise RuntimeError("Could not read the current TCP pose before preflight.")
+        if current_pose[2] < lifted_z:
+            self.writer.log("Lifting vertically at the current XY/R before travelling to the O.")
+            self.writer.send_motion(
+                f"MovL({current_pose[0]:.3f},{current_pose[1]:.3f},"
+                f"{lifted_z:.3f},{current_pose[3]:.3f})"
+            )
+            self.sync_motion((current_pose[0], current_pose[1], lifted_z, current_pose[3]))
+            self.check_actual_joints("initial vertical pen lift")
+
         for i, stroke in enumerate(strokes, start=1):
             points = stroke["points"]
             r_deg = stroke["r"]
@@ -1216,16 +1267,18 @@ class MG400SVGDrawer:
 
             start_pen = points[0]
             self.move_flange_above_pen_tip(start_pen[0], start_pen[1], r_deg, lifted_z)
-            self.sync_motion()
+            start_fx, start_fy = self.flange_for_pen_tip(start_pen[0], start_pen[1], r_deg)
+            self.sync_motion((start_fx, start_fy, lifted_z, r_deg))
             self.check_actual_joints("preflight stroke start")
 
+            last_fx, last_fy = start_fx, start_fy
             for pen_x, pen_y in points[1:]:
-                flange_x, flange_y = self.flange_for_pen_tip(pen_x, pen_y, r_deg)
+                last_fx, last_fy = self.flange_for_pen_tip(pen_x, pen_y, r_deg)
                 self.writer.send_motion(
-                    f"MovL({flange_x:.3f},{flange_y:.3f},{lifted_z:.3f},{r_deg:.3f})"
+                    f"MovL({last_fx:.3f},{last_fy:.3f},{lifted_z:.3f},{r_deg:.3f})"
                 )
 
-            self.sync_motion()
+            self.sync_motion((last_fx, last_fy, lifted_z, r_deg))
             self.check_actual_joints("preflight stroke end")
 
         self.writer.log("PHYSICAL PRE-FLIGHT completed successfully.")
@@ -1265,13 +1318,13 @@ class MG400SVGDrawer:
             self.writer.send_motion(
                 f"MovJ({start_fx:.3f},{start_fy:.3f},{lifted_z:.3f},{r_deg:.3f})"
             )
-            self.sync_motion()
+            self.sync_motion((start_fx, start_fy, lifted_z, r_deg))
             self.check_actual_joints("before pen down")
 
             self.writer.send_motion(
                 f"MovL({start_fx:.3f},{start_fy:.3f},{WRITING_Z:.3f},{r_deg:.3f})"
             )
-            self.sync_motion()
+            self.sync_motion((start_fx, start_fy, WRITING_Z, r_deg))
             self.check_actual_joints("pen down")
 
             last_fx, last_fy = start_fx, start_fy
@@ -1281,13 +1334,13 @@ class MG400SVGDrawer:
                     f"MovL({last_fx:.3f},{last_fy:.3f},{WRITING_Z:.3f},{r_deg:.3f})"
                 )
 
-            self.sync_motion()
+            self.sync_motion((last_fx, last_fy, WRITING_Z, r_deg))
             self.check_actual_joints("stroke end")
 
             self.writer.send_motion(
                 f"MovL({last_fx:.3f},{last_fy:.3f},{lifted_z:.3f},{r_deg:.3f})"
             )
-            self.sync_motion()
+            self.sync_motion((last_fx, last_fy, lifted_z, r_deg))
             self.check_actual_joints("pen lifted")
 
         self.writer.log("Finished SVG drawing.")
@@ -1297,50 +1350,134 @@ class MG400SVGDrawer:
 # RUN
 # ============================================================
 
-if __name__ == "__main__":
-    writer = MG400Writer()
-    writer.settings.ip = ROBOT_IP
-    writer.settings.live_robot = LIVE_ROBOT
-
+def build_letter_drawer(character, writer, temp_dir, right_offset_mm=0.0):
+    svg_file = str(Path(temp_dir) / f"letter_{character}.svg")
+    write_character_svg(character, svg_file)
     drawer = MG400SVGDrawer(
         writer,
         DrawerSettings(
-            svg_file=SVG_FILE,
+            svg_file=svg_file,
             drawing_width_mm=TEST_DRAWING_WIDTH_MM,
             drawing_height_mm=TEST_DRAWING_HEIGHT_MM,
             travel_lift_mm=10.0,
             min_path_length_mm=MIN_PATH_LENGTH_MM,
             simplify_tolerance_mm=SIMPLIFY_TOLERANCE_MM,
+            right_offset_mm=right_offset_mm,
         ),
     )
+    return svg_file, drawer
 
-    print()
-    print("MG400 SVG DRAW TEST")
-    print("===================")
-    print(f"SVG file: {SVG_FILE}")
-    print(f"Paper main rectangle: ~{PAPER_WIDTH_MM:.0f} x {PAPER_HEIGHT_MM:.0f} mm")
-    print(f"First test drawing area: {drawer.settings.drawing_width_mm:.0f} x {drawer.settings.drawing_height_mm:.0f} mm")
-    print(f"Live robot: {LIVE_ROBOT}")
-    print(f"Preflight only: {PREFLIGHT_ONLY}")
-    print()
 
-    if LIVE_ROBOT:
-        writer.connect_robot()
-        writer.setup_robot()
+def main():
+    parser = argparse.ArgumentParser(description="Preview or draw AtomS3R screen letters on an MG400.")
+    parser.add_argument("--live", action="store_true", help="connect to the physical robot")
+    parser.add_argument("--draw", action="store_true", help="draw after pen-up preflight")
+    parser.add_argument("--confirm-draw", action="store_true", help="confirm pen-down drawing")
+    parser.add_argument("--web-port", type=int, default=8000, help="local web-control port to check")
+    parser.add_argument("--atom-port", default="COM4", help="AtomS3R USB serial port")
+    parser.add_argument("--atom-baud", type=int, default=115200, help="AtomS3R USB serial baud rate")
+    parser.add_argument("--character", choices=tuple(GLYPH_STROKES), help="offline preview only; live mode reads the Atom")
+    parser.add_argument("--listen", action="store_true", help="draw each Atom PRINT signal in the next rightward paper slot")
+    parser.add_argument("--reset-cursor", action="store_true", help="start the letter sequence at the centered first slot")
+    args = parser.parse_args()
+    if args.draw and not args.live:
+        parser.error("--draw requires --live")
+    if args.confirm_draw and not args.draw:
+        parser.error("--confirm-draw requires --draw")
+    if args.live and args.character:
+        parser.error("--character is for offline preview; live mode reads the Atom screen")
+    if args.listen and not args.live:
+        parser.error("--listen requires --live")
+    if args.listen and args.draw:
+        parser.error("--listen already draws on the Atom PRINT signal; do not also use --draw")
+    if args.reset_cursor and not args.listen:
+        parser.error("--reset-cursor requires --listen")
 
-    try:
-        if LIVE_ROBOT:
-            planned = drawer.plan_all_segments()
+    writer = MG400Writer()
+    writer.settings.ip = ROBOT_IP
+    writer.settings.live_robot = args.live
 
-            if PREFLIGHT_ONLY:
-                drawer.preflight(planned)
-            else:
-                drawer.draw(planned)
-        else:
-            print(
-                "LIVE_ROBOT=False: SVG was loaded and simplified, but IK planning\n"
-                "and robot movement were not run because they require a live MG400."
+    if args.live:
+        try:
+            with urlopen(f"http://127.0.0.1:{args.web_port}/api/status", timeout=1.0) as response:
+                web_status = json.loads(response.read().decode("utf-8"))
+        except URLError:
+            web_status = None
+        if web_status and web_status.get("connected"):
+            raise RuntimeError(
+                f"Robot is still connected through the web control page on port {args.web_port}. "
+                "Click Disconnect there before starting the letter listener."
             )
-    finally:
-        if LIVE_ROBOT:
+
+        print("The local web control page is disconnected.")
+        input("Confirm the paper and pen are secured, the area is clear, and the E-stop is reachable; press Enter: ")
+
+    if args.listen:
+        right_offset_mm = 0.0 if args.reset_cursor else load_next_right_offset()
+        if args.reset_cursor:
+            save_next_right_offset(right_offset_mm)
+        if right_offset_mm > max_right_offset_mm():
+            print("The saved letter row is full. Replace/clear the paper or use --reset-cursor for a fresh centered row.")
+            return
+
+    with tempfile.TemporaryDirectory(prefix="mg400-letter-") as temp_dir:
+        if not args.live:
+            character = args.character or "O"
+            svg_file, drawer = build_letter_drawer(character, writer, temp_dir)
+            points = [point for path in drawer.scaled_paths for point in path]
+            print(f"Offline preview: {character}, {len(drawer.scaled_paths)} stroke(s), {len(points)} points")
+            print(
+                "Pen-tip bounds: "
+                f"X={min(p[0] for p in points):.1f}..{max(p[0] for p in points):.1f}, "
+                f"Y={min(p[1] for p in points):.1f}..{max(p[1] for p in points):.1f} mm"
+            )
+            return
+
+        try:
+            writer.connect_robot()
+            writer.setup_robot()
+
+            if args.listen:
+                while True:
+                    print(f"Waiting for Atom PRINT on {args.atom_port}; next slot is +{right_offset_mm:.0f} mm right.")
+                    character = wait_for_print_signal(args.atom_port, args.atom_baud)
+                    print(f"Atom print request received: {character}")
+                    try:
+                        svg_file, drawer = build_letter_drawer(
+                            character, writer, temp_dir, right_offset_mm
+                        )
+                    except ValueError as error:
+                        if "exceeds the measured paper area" not in str(error):
+                            raise
+                        print(f"Stopping letter sequence: {error}")
+                        break
+
+                    planned = drawer.plan_all_segments()
+                    drawer.preflight(planned)
+                    print(f"Preflight passed; drawing {character} at right offset {right_offset_mm:.0f} mm.")
+                    drawer.draw(planned)
+                    right_offset_mm += LETTER_ADVANCE_MM
+                    save_next_right_offset(right_offset_mm)
+                    if right_offset_mm > max_right_offset_mm():
+                        print("Paper row is full; replace/clear the paper or use --reset-cursor for a fresh row.")
+                        break
+            else:
+                character = read_atom_character(args.atom_port, args.atom_baud)
+                print(f"Atom screen letter: {character} (read from {args.atom_port})")
+                _, drawer = build_letter_drawer(character, writer, temp_dir)
+                planned = drawer.plan_all_segments()
+                drawer.preflight(planned)
+                if args.draw:
+                    confirmation = f"DRAW {character}" if args.confirm_draw else input(
+                        f"Type DRAW {character} to lower the pen and write it: "
+                    )
+                    if confirmation == f"DRAW {character}":
+                        drawer.draw(planned)
+                    else:
+                        print("Drawing cancelled; pen-up preflight only.")
+        finally:
             writer.close_robot()
+
+
+if __name__ == "__main__":
+    main()

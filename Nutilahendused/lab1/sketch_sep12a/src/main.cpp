@@ -1,4 +1,7 @@
 #include <Arduino.h>
+#include <M5Unified.h>
+#include <Preferences.h>
+#include <cstring>
 
 #ifndef SENSOR_PIN
 #define SENSOR_PIN 5
@@ -20,6 +23,54 @@ constexpr float kNormalAirMinKpa = 95.0f;
 constexpr float kNormalAirMaxKpa = 108.0f;
 
 float atmosphericPressureKpa = 0.0f;
+char currentCharacter = 'A';
+char currentLetter = 'A';
+char currentDigit = '0';
+bool numericMode = false;
+bool longPressHandled = false;
+
+void updateCharacterButton();
+void showCharacterOnDisplay();
+
+void saveCurrentSelection() {
+  Preferences preferences;
+  if (preferences.begin("atom-screen", false)) {
+    preferences.putBool("numeric", numericMode);
+    preferences.putUChar("letter", static_cast<uint8_t>(currentLetter));
+    preferences.putUChar("digit", static_cast<uint8_t>(currentDigit));
+    preferences.end();
+  }
+}
+
+void showCurrentSelection() {
+  currentCharacter = numericMode ? currentDigit : currentLetter;
+  showCharacterOnDisplay();
+  Serial.printf("MODE=%s\n", numericMode ? "NUMERIC" : "ALPHA");
+  Serial.printf("CHAR=%c\n", currentCharacter);
+}
+
+void pollSerialCommands() {
+  static char command[16];
+  static size_t commandLength = 0;
+
+  while (Serial.available() > 0) {
+    const char value = static_cast<char>(Serial.read());
+    if (value == '\r') {
+      continue;
+    }
+    if (value == '\n') {
+      command[commandLength] = '\0';
+      if (strcmp(command, "GET_CHAR") == 0) {
+        Serial.printf("CHAR=%c\n", currentCharacter);
+      }
+      commandLength = 0;
+    } else if (commandLength < sizeof(command) - 1) {
+      command[commandLength++] = value;
+    } else {
+      commandLength = 0;
+    }
+  }
+}
 
 float pressureKpaFromMillivolts(int millivolts) {
   const float vout = millivolts / 1000.0f;
@@ -35,6 +86,7 @@ float readAveragePressureKpa(uint16_t samples) {
 
   for (uint16_t i = 0; i < samples; ++i) {
     sum += readPressureKpa();
+    updateCharacterButton();
     delay(kSampleDelayMs);
   }
 
@@ -61,14 +113,74 @@ void printStartupHint() {
   Serial.println(" V");
   Serial.println("Keep the pump off during startup; the first readings become the air reference.");
 }
+
+void showCharacterOnDisplay() {
+  M5.Display.fillScreen(TFT_BLACK);
+  M5.Display.setTextColor(TFT_WHITE);
+  M5.Display.setTextDatum(middle_center);
+  M5.Display.setTextSize(6);
+  M5.Display.drawString(String(currentCharacter), M5.Display.width() / 2,
+                        M5.Display.height() / 2);
+  M5.Display.setTextSize(2);
+  M5.Display.drawString(numericMode ? "123" : "ABC", M5.Display.width() - 18, 12);
+}
+
+void updateCharacterButton() {
+  pollSerialCommands();
+  M5.update();
+
+  if (!M5.BtnA.isPressed()) {
+    longPressHandled = false;
+  }
+
+  if (M5.BtnA.wasDoubleClicked()) {
+    numericMode = !numericMode;
+    currentCharacter = numericMode ? currentDigit : currentLetter;
+    saveCurrentSelection();
+    showCurrentSelection();
+    Serial.printf("MODE_TOGGLE:%s\n", numericMode ? "NUMERIC" : "ALPHA");
+  } else if (M5.BtnA.wasSingleClicked()) {
+    if (numericMode) {
+      currentDigit = currentDigit == '9' ? '0' : currentDigit + 1;
+      currentCharacter = currentDigit;
+    } else {
+      currentLetter = currentLetter == 'Z' ? 'A' : currentLetter + 1;
+      currentCharacter = currentLetter;
+    }
+    saveCurrentSelection();
+    showCurrentSelection();
+    Serial.printf("Short press: %c\n", currentCharacter);
+  } else if (!longPressHandled && M5.BtnA.pressedFor(700)) {
+    longPressHandled = true;
+    Serial.printf("PRINT=%c\n", currentCharacter);
+  }
+}
 }  // namespace
 
 void setup() {
   Serial.begin(kSerialBaud);
   delay(1500);
 
+  M5.begin();
+  Preferences preferences;
+  if (preferences.begin("atom-screen", true)) {
+    numericMode = preferences.getBool("numeric", false);
+    const uint8_t savedLetter = preferences.getUChar("letter", 'A');
+    const uint8_t savedDigit = preferences.getUChar("digit", '0');
+    preferences.end();
+    currentLetter = savedLetter >= 'A' && savedLetter <= 'Z'
+                        ? static_cast<char>(savedLetter)
+                        : 'A';
+    currentDigit = savedDigit >= '0' && savedDigit <= '9'
+                       ? static_cast<char>(savedDigit)
+                       : '0';
+  }
+  currentCharacter = numericMode ? currentDigit : currentLetter;
+  showCurrentSelection();
+
   analogReadResolution(12);
   analogSetPinAttenuation(SENSOR_PIN, ADC_11db);
+  randomSeed(micros() ^ analogRead(SENSOR_PIN));
 
   printStartupHint();
 
@@ -98,5 +210,8 @@ void loop() {
   Serial.print(" kPa  Air=");
   Serial.println(normalAirStatus(pressureAbsKpa));
 
-  delay(kPrintDelayMs);
+  for (uint16_t elapsed = 0; elapsed < kPrintDelayMs; elapsed += 10) {
+    updateCharacterButton();
+    delay(10);
+  }
 }
