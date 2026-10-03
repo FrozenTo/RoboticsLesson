@@ -51,6 +51,7 @@ listener resumes from `letter_cursor.json`; use `--reset-cursor` with
 First, clone and install it
 From somewhere outside your RoboticsLesson repo:
 git clone https://github.com/KKallas/mg400-base.git
+
 cd mg400-base
 
 python -m venv .venv
