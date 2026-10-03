@@ -1,0 +1,75 @@
+# timestamp	serial_output
+2026-10-03T16:02:23.024	  P_abs=100.0 kPa  P_gauge=1.4 kPa  Air=NORMAL
+2026-10-03T16:02:23.095	ADC=989  Voltage=858 mV  P_abs=98.9 kPa  P_gauge=0.3 kPa  Air=NORMAL
+2026-10-03T16:02:23.159	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:25.232	MODE=ALPHA
+2026-10-03T16:02:25.297	CHAR=W
+2026-10-03T16:02:25.358	
+2026-10-03T16:02:25.414	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:27.489	MODE=ALPHA
+2026-10-03T16:02:27.550	CHAR=W
+2026-10-03T16:02:27.599	
+2026-10-03T16:02:27.665	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:29.734	MODE=ALPHA
+2026-10-03T16:02:29.795	CHAR=W
+2026-10-03T16:02:29.855	
+2026-10-03T16:02:29.904	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:31.970	MODE=ALPHA
+2026-10-03T16:02:32.035	CHAR=W
+2026-10-03T16:02:32.086	
+2026-10-03T16:02:32.151	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:34.221	MODE=ALPHA
+2026-10-03T16:02:34.293	CHAR=W
+2026-10-03T16:02:34.342	
+2026-10-03T16:02:34.408	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:36.478	MODE=ALPHA
+2026-10-03T16:02:36.524	CHAR=W
+2026-10-03T16:02:36.590	
+2026-10-03T16:02:36.655	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:38.729	MODE=ALPHA
+2026-10-03T16:02:38.789	CHAR=W
+2026-10-03T16:02:38.850	
+2026-10-03T16:02:38.906	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:40.981	MODE=ALPHA
+2026-10-03T16:02:41.041	CHAR=W
+2026-10-03T16:02:41.093	
+2026-10-03T16:02:41.159	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:43.234	MODE=ALPHA
+2026-10-03T16:02:43.295	CHAR=W
+2026-10-03T16:02:43.356	
+2026-10-03T16:02:43.413	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:45.482	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:02:47.564	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:02:49.633	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:02:51.701	ESP-ROM:esp32s3-20210327
+2026-10-03T16:02:51.766	Build:Mar 27 2021
+2026-10-03T16:02:51.823	rst:0x15 (USB_UART_CHIP_RESET),boot:0x18 (SPI_FAST_FLASH_BOOT)
+2026-10-03T16:02:51.879	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:53.951	MODE=ALPHA
+2026-10-03T16:02:54.011	CHAR=W
+2026-10-03T16:02:54.070	
+2026-10-03T16:02:54.127	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:56.188	MODE=ALPHA
+2026-10-03T16:02:56.255	CHAR=W
+2026-10-03T16:02:56.305	
+2026-10-03T16:02:56.376	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:02:58.437	MODE=ALPHA
+2026-10-03T16:02:58.502	CHAR=W
+2026-10-03T16:02:58.561	
+2026-10-03T16:02:58.618	SERIAL_ERROR: COM4 closed by device.
+2026-10-03T16:03:00.693	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:02.760	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:04.828	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:06.896	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:08.998	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:11.083	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:13.150	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:15.217	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:17.295	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:19.373	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:21.455	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:23.523	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:25.601	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:27.679	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:29.747	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."
+2026-10-03T16:03:31.833	SERIAL_ERROR: Exception calling "Open" with "0" argument(s): "The port 'COM4' does not exist."

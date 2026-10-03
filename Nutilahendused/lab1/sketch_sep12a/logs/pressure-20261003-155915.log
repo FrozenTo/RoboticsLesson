@@ -1,0 +1,4 @@
+# timestamp	serial_output
+2026-10-03T15:59:15.497	0  Voltage=0 mV  P_abs=-31.1 kPa  P_gauge=-3.1 kPa  Air=LOW
+2026-10-03T15:59:15.565	ADC=0  Voltage=0 mV  P_abs=-31.1 kPa  P_gauge=-3.1 kPa  Air=LOW
+2026-10-03T15:59:15.631	ADC=0  Voltage=0 mV  P_abs=-31.1 kPa  P_gauge=-3.1 kPa  Air=LOW

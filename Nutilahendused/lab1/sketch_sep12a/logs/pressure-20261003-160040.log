@@ -1,0 +1,3 @@
+# timestamp	serial_output
+2026-10-03T16:00:40.186	V  P_abs=99.1 kPa  P_gauge=0.9 kPa  Air=NORMAL
+2026-10-03T16:00:40.275	ADC=984  Voltage= mV  P_abs=99.1 kPa  P_gauge=0.9 kPa  Air=NORMAL
