@@ -1,4 +1,8 @@
-### Enne kui paned printima - vaata, kas piisavalt palju pinda puutub mudeliga. Kui mudeli seinad on liiga õhukesed, siis lisa brim 5mm (5mm prob normaalne) mudelile. Kui teed gridfinity jaoks ruutude paigutamiseks mudeli, siis see peab kinnituma nurgade peale (45 kraadi). Kui all on jalad olemas ja üleval pind ilma nurgate - siis tuleb halvasti välja. 
+### Enne kui paned printima - vaata, kas piisavalt palju pinda puutub mudeliga. Kui mudeli seinad on liiga õhukesed, siis lisa brim 5mm (5mm prob normaalne) mudelile. 
+
+### Kui teed gridfinity jaoks ruutude paigutamiseks mudeli, siis see peab kinnituma nurgade peale (45 kraadi). Kui all on jalad olemas ja üleval pind ilma nurgate - siis tuleb halvasti välja. 
+
+### Kui tahad lisada supporti (puud), ava prusa sliceris print settings -> support material -> style -> organic. Aga pane enne seda paremalt ülevalt Normal mode peale.
 
 # Labor 2 — protsess ja paigutus
 
