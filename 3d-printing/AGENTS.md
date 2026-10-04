@@ -9,9 +9,20 @@ displayed by an ESP32.
 
 ## Repository structure
 
-- `3d-print/lab1/` — 3D Printing Lab 1
-- `3d-print/lab1/README.md` — lab documentation and development log
+- `3d-printing/lab1/` — 3D Printing Lab 1
+- `3d-printing/lab1/README.md` — lab documentation and development log
+- `3d-printing/lab2/` — 3D Printing Lab 2 (process and layout, Gridfinity holders, two cameras)
+- `3d-printing/lab2/Readme.md` — lab 2 assignment and development log
+- `3d-printing/lab2/MG 400 rakis.md` — rig system description: grid cells, coordinates, Gridfinity bin rules
+- `3d-printing/lab2/docs/` — `layout.md`, `refit_test.csv`, `bom.md`
 - CAD source files, STL files and 3MF files must be kept in the lab folder.
+
+## MG400 rig reference
+
+For any part that lives on the rig (holders, fixtures, camera mounts), read
+`3d-printing/lab2/MG 400 rakis.md` first. It defines the Gridfinity grid, cell
+addressing (`B-2`, `E+3`), coordinate formulas, reach zones, bin rules and the
+calibration procedure. Design against cell names plus offset, not raw coordinates.
 
 ## File rules
 

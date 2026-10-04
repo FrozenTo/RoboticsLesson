@@ -14,8 +14,8 @@
 
 Mõõda nihikuga:
 
-- [ ] AtomS3
-- [ ] Polükarbonaatklaas — 24 × 24 × 2 mm
+- [O] AtomS3
+- [O] Polükarbonaatklaas — 24 × 24 × 2 mm
 - [ ] Akumoodul
 
 Fusionis:
