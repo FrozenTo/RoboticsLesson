@@ -55,23 +55,27 @@ väljund teisel pool (numbrid +3…+5). Käsi liigub protsessis ühes suunas.
 
 | Hoidev osa | Ruut / ruudud | Suurus ruutudes | Tsoon | r J1-st (mm) |
 | :--- | :--- | :--- | :--- | :--- |
-| AtomS3 sisendhoidik | B-4 | 1 × 1 | sisend | 234 |
-| Klaasi sisendhoidik | D-5, E-5, D-4, E-4 | 2 × 2 | sisend | 303–361 |
-| Akumooduli sisendhoidik | B-5 | 1 × 1 | sisend | 262 |
+| Klaasi sisendhoidik | A-3, B-3, A-4, B-4 | 2 × 2 | sisend | 175–234 |
+| AtomS3 sisendhoidik | C-3, D-3, C-4, D-4 | 2 × 2 | sisend | 247–303 |
+| Akumooduli sisendhoidik | E-3, F-3, E-4, F-4 | 2 × 2 | sisend | 325–379 |
 | Töökoha hoidik | B-2 | 1 × 1 | töökoht | 192 |
 | Kalibreerimishoidik (1 × 1) | B-2 | 1 × 1 | kalibreerimine | 192 |
 | Põhiväljundi hoidik (4-le) | E+3, E+4 | 2 × 1 | väljund | 325 / 341 |
 | Praagi hoidik | F+5 | 1 × 1 | väljund | 397 |
 
-Vabad ruudud järgmisteks laboriteks (nt kaks kaamerat, lisatöökohad): kaugemad E/F
-keskmised ruudud ja D+1…F+1 ääred. Jäta roboti liikumistee (kahe hoidiku vaheline
-otsetee) vabaks: kaks hoidikut, mille vahel käsi risti üle kolmanda käib, ei ole hea paigutus.
+Kõik sisendhoidikud hoiavad **vähemalt 4 ühikut**; ~24 mm detailide puhul ei mahu 4 pesa
+1 × 1 ruutu, seega on need **2 × 2** (välismõõt 83,5 × 83,5 mm). Töökoht ja praak on 1 × 1
+(41,5 × 41,5 mm), põhiväljund 2 × 1 (83,5 × 41,5 mm).
+
+Vabad ruudud järgmisteks laboriteks (nt kaks kaamerat, lisatöökohad): number −5 veerg
+(A-5…F-5) ja +poolel keskmised ruudud (D+1…F+1). Jäta roboti liikumistee (kahe hoidiku
+vaheline otsetee) vabaks: kaks hoidikut, mille vahel käsi risti üle kolmanda käib, ei ole hea paigutus.
 
 ### Roboti ulatuse kontroll
 
 | Kontroll | Reegel | Tulemus |
 | :--- | :--- | :--- |
-| Kõik ruudud ≤ 400 mm | jah | sisend 234–361, töökoht 192, väljund 325–397 |
+| Kõik ruudud ≤ 400 mm | jah | sisend 175–379, töökoht 192, väljund 325–397 |
 | Väldi G-5, G-4, G-3, G+3, G+4, G+5 | jah | ühtki hoidikut neis ei ole (ainult F+5 = 397, OK) |
 | J1 ±160° pööre | jah | kõik ruudud esiküljel |
 | Kõrged osad (> 60 mm) eemale käe teelt | jah | hoidikud madalad; kaamerapost eraldi (osa 5) |
@@ -98,9 +102,9 @@ flowchart TB
         end
     end
     NEST --> GRID
-    ATOM[AtomS3 sisend B-4]
-    GLASS[Klaasi sisend 2x2 D-5 E-5 D-4 E-4]
-    BATT[Aku sisend B-5]
+    ATOM[AtomS3 sisend 2x2 C-3 D-3 C-4 D-4]
+    GLASS[Klaasi sisend 2x2 A-3 B-3 A-4 B-4]
+    BATT[Aku sisend 2x2 E-3 F-3 E-4 F-4]
     WS[Tookoht ja kalibr. B-2]
     MAIN[Poohivaljund 2x1 E+3 E+4]
     SCRAP[Praak F+5]
