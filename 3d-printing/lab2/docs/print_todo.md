@@ -26,7 +26,7 @@ jalg 4,75 mm (profiil 0,8 / 1,8 / 2,15 mm); pesa lõtk 1–2 mm külje kohta + 4
 | 2 | Klaasi sisendhoidik | A-3, B-3, A-4, B-4 | 2 × 2 | 83,5 × 83,5 | kalibreerimine | [ ] |
 | 3 | Töökoha hoidik | B-2 | 1 × 1 | 41,5 × 41,5 | klaas + mannekeen | [ ] |
 | 4 | AtomS3 sisendhoidik | C-3, D-3, C-4, D-4 | 2 × 2 | 83,5 × 83,5 | mõõdud | [ ] |
-| 5 | Akumooduli sisendhoidik | E-3, F-3, E-4, F-4 | 2 × 2 | 83,5 × 83,5 | aku mõõdud | [ ] |
+| 5 | Akumooduli sisendhoidik | E-3, F-3, E-4, F-4 | 2 × 2 | 83,5 × 83,5 | — | [ ] |
 | 6 | Põhiväljundi hoidik | E+3, E+4 | 2 × 1 | 83,5 × 41,5 | — | [ ] |
 | 7 | Praagi hoidik | F+5 | 1 × 1 | 41,5 × 41,5 | — | [ ] |
 | 8 | Tööriista kaamera kinnitus | flantsi küljes | — | mõõta | mooduli mõõdud | [ ] |
@@ -86,11 +86,12 @@ jalg 4,75 mm (profiil 0,8 / 1,8 / 2,15 mm); pesa lõtk 1–2 mm külje kohta + 4
 - [ ] Vähemalt 4 ühikut (4 AtomS3 pesa).
 - [ ] Prindi ja kontrolli sobivust.
 
-## 5. Akumooduli sisendhoidik — 2 × 2 (suurus selgub mõõtmisel)
+## 5. Akumooduli sisendhoidik — 2 × 2
 
-- [ ] **Eeltingimus:** akumoodul nihikuga mõõdetud (mõõtu ülesandes ei anta).
-- [ ] Välismõõt 83,5 × 83,5 mm (2 × 2), nurk 3,75 mm, jalg 4,75 mm — 4 pesa mahub; kui moodul on väike, võib piisata 1 × 2 või 2 × 1.
-- [ ] 4 pesa, iga pesa = mooduli mõõt + 2 × 1–2 mm lõtk, sügavus ≥ mooduli kõrgus, 45° kaldserv ülal.
+- [ ] Aku mõõdud: 24 × 24 × 18 mm (ruut, sama põhi kui AtomS3, aga 18 mm kõrge).
+- [ ] Välismõõt 83,5 × 83,5 mm (2 × 2), nurk 3,75 mm, jalg 4,75 mm.
+- [ ] 4 pesa, iga pesa 26–28 mm (24 + 2 × 1–2 mm lõtk), sügavus ≥ 18 mm (kogu aku sisse), 45° kaldserv ülal.
+- [ ] Hoidiku sisemine sügavus ≥ 18 mm; kogukõrgus ≈ 4,75 + põhi + 18 ≈ 24 mm (kõrgus ei pea olema täpselt 7 mm ühikutes). Jääb alla 60 mm piiri.
 - [ ] Vähemalt 4 ühikut.
 - [ ] Prindi ja kontrolli sobivust.
 

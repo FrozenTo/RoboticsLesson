@@ -1,3 +1,5 @@
+### Enne kui paned printima - vaata, kas piisavalt palju pinda puutub mudeliga. Kui mudeli seinad on liiga õhukesed, siis lisa brim 5mm (5mm prob normaalne) mudelile. Kui teed gridfinity jaoks ruutude paigutamiseks mudeli, siis see peab kinnituma nurgade peale (45 kraadi). Kui all on jalad olemas ja üleval pind ilma nurgate - siis tuleb halvasti välja. 
+
 # Labor 2 — protsess ja paigutus
 
 See fail on labori 2 analüüsi alus: sisendid, töökohad, väljundid ja iga hoidiku ruut.
@@ -10,13 +12,13 @@ Allikas: [`../Readme.md`](../Readme.md), [`../MG 400 rakis.md`](../MG%20400%20ra
 ## 1. Mõõdud
 
 Mõõdetud nihikuga, ühikud mm. AtomS3 ja Atomi mannekeen on kursuse standard
-(24 × 24 × 13 mm). Akumooduli mõõtu ülesandes ei anta — mõõda ise.
+(24 × 24 × 13 mm). Akumoodul on ruudukujuline, sama põhi kui AtomS3, aga 18 mm kõrge.
 
 | Detail | Nominaal (L × W × H, mm) | Mõõdetud nihikuga (mm) | Märkus |
 | :--- | :--- | :--- | :--- |
 | AtomS3 | 24 × 24 × 13 | | ekraan ülespoole igas pesas |
 | Polükarbonaatklaas | 24 × 24 × 2 | | õhuke, sile, kerge — kõige raskem tõsta |
-| Akumoodul | — | | mõõda ise, mõõtu ülesandes ei anta |
+| Akumoodul | 24 × 24 × 18 | | ruut, sama põhi kui AtomS3, 18 mm kõrge |
 
 ### Pesade lõtk (Labor 1 põhjal)
 
