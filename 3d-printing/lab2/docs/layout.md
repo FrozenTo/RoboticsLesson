@@ -31,9 +31,12 @@ Lõtk ei pea olema kõigil pesadel sama — mida täpsem koht, seda väiksem lõ
 
 | Pesa | Kasutatud lõtk (mm) | Labor 1 number, millelt tuli | Põhjendus |
 | :--- | :--- | :--- | :--- |
-| Sisend | | 0,1 / 0,2 | lõtk 1–2 mm + 45° kaldserv ülal |
+| Sisend | | 0,1 / 0,2 | lõtk ≥ 0,2 mm külje kohta + 45° kaldserv ülal |
 | Töökoht | | 0,1 / 0,2 | detail peab paigal seisma; väike lõtk, suur kaldserv |
 | Väljund | | 0,1 / 0,2 | robot paneb ebatäpsemalt; suurem kaldserv |
+
+Pesa mõõt = detail + 2 × lõtk külje kohta. 24 mm detaili ja 0,2 mm lõtku korral on pesa
+**24,4 mm** (mitte 26 mm). 1 mm lõtku ei kasutata — see teeb pesa liiga lõdvaks.
 
 ## 2. Protsess
 

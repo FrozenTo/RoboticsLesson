@@ -15,7 +15,7 @@ Viited: [`layout.md`](layout.md) (paigutus ja ruudud), [`../MG 400 rakis.md`](..
 
 **Gridfinity põhimõõdud (kõigile hoidikutele):** samm 42 mm; välismõõt = `42 · n − 0,5 mm`
 (1 × 1 = 41,5 mm, 2 × 1 = 83,5 × 41,5 mm, 2 × 2 = 83,5 × 83,5 mm); nurga raadius 3,75 mm;
-jalg 4,75 mm (profiil 0,8 / 1,8 / 2,15 mm); pesa lõtk 1–2 mm külje kohta + 45° kaldserv.
+jalg 4,75 mm (profiil 0,8 / 1,8 / 2,15 mm); pesa lõtk ≥ 0,2 mm külje kohta (Labor 1) + 45° kaldserv.
 Üks prinditud tükk ≤ 250 × 250 mm.
 
 ## Kokkuvõte
@@ -62,7 +62,7 @@ jalg 4,75 mm (profiil 0,8 / 1,8 / 2,15 mm); pesa lõtk 1–2 mm külje kohta + 4
 ## 2. Klaasi sisendhoidik — 2 × 2
 
 - [ ] Välismõõt 83,5 × 83,5 mm (2 × 2 ruut), nurga raadius 3,75 mm, jalg 4,75 mm.
-- [ ] 4 pesa, iga pesa 26–28 mm (24 + 2 × 1–2 mm lõtk), madal soon sügavusega 3–4 mm (klaas on 2 mm), 45° kaldserv ülal.
+- [ ] 4 pesa, iga pesa 24,4 mm (24 + 2 × 0,2 mm lõtk), madal soon sügavusega 3–4 mm (klaas on 2 mm), 45° kaldserv ülal.
 - [ ] Vähemalt 4 ühikut (4 klaasi).
 - [ ] Inimene saab ligi: väljalõige servas või väljalükkeauk põhjas (2 mm klaas siledas pesas ei tule sõrmedega välja).
 - [ ] Prindi ja kontrolli sobivust päris klaasiga.
@@ -72,7 +72,7 @@ jalg 4,75 mm (profiil 0,8 / 1,8 / 2,15 mm); pesa lõtk 1–2 mm külje kohta + 4
 ## 3. Töökoha hoidik — 1 × 1
 
 - [ ] Välismõõt 41,5 × 41,5 mm (1 × 1 ruut), nurga raadius 3,75 mm, jalg 4,75 mm.
-- [ ] Atomi pesa 26 × 26 mm, 45° kaldserv, sügavus ≥ 13 mm (ekraan üles).
+- [ ] Atomi pesa 24,4 × 24,4 mm (24 + 2 × 0,2 mm lõtk), 45° kaldserv, sügavus ≥ 13 mm (ekraan üles).
 - [ ] Atom/mannekeen istub ainult ühte moodi, ekraan ülespoole.
 - [ ] Klaasil on tema peal kindel koht.
 - [ ] Peab vastu roboti survele (paar njuutonit), ülalt vaba tee.
@@ -82,7 +82,7 @@ jalg 4,75 mm (profiil 0,8 / 1,8 / 2,15 mm); pesa lõtk 1–2 mm külje kohta + 4
 ## 4. AtomS3 sisendhoidik — 2 × 2
 
 - [ ] Välismõõt 83,5 × 83,5 mm (2 × 2 ruutu), nurga raadius 3,75 mm, jalg 4,75 mm.
-- [ ] 4 pesa, iga pesa 26 × 26 mm (24 × 24 + 1 mm lõtk külje kohta), 45° kaldserv ülal, sügavus ≥ 13 mm (ekraan üles).
+- [ ] 4 pesa, iga pesa 24,4 × 24,4 mm (24 + 2 × 0,2 mm lõtk), 45° kaldserv ülal, sügavus ≥ 13 mm (ekraan üles).
 - [ ] Vähemalt 4 ühikut (4 AtomS3 pesa).
 - [ ] Prindi ja kontrolli sobivust.
 
@@ -90,7 +90,7 @@ jalg 4,75 mm (profiil 0,8 / 1,8 / 2,15 mm); pesa lõtk 1–2 mm külje kohta + 4
 
 - [ ] Aku mõõdud: 24 × 24 × 18 mm (ruut, sama põhi kui AtomS3, aga 18 mm kõrge).
 - [ ] Välismõõt 83,5 × 83,5 mm (2 × 2), nurk 3,75 mm, jalg 4,75 mm.
-- [ ] 4 pesa, iga pesa 26–28 mm (24 + 2 × 1–2 mm lõtk), sügavus ≥ 18 mm (kogu aku sisse), 45° kaldserv ülal.
+- [ ] 4 pesa, iga pesa 24,4 mm (24 + 2 × 0,2 mm lõtk), sügavus ≥ 18 mm (kogu aku sisse), 45° kaldserv ülal.
 - [ ] Hoidiku sisemine sügavus ≥ 18 mm; kogukõrgus ≈ 4,75 + põhi + 18 ≈ 24 mm (kõrgus ei pea olema täpselt 7 mm ühikutes). Jääb alla 60 mm piiri.
 - [ ] Vähemalt 4 ühikut.
 - [ ] Prindi ja kontrolli sobivust.
@@ -98,7 +98,7 @@ jalg 4,75 mm (profiil 0,8 / 1,8 / 2,15 mm); pesa lõtk 1–2 mm külje kohta + 4
 ## 6. Põhiväljundi hoidik — 2 × 1
 
 - [ ] Välismõõt 83,5 × 41,5 mm (2 × 1 ruut), nurk 3,75 mm, jalg 4,75 mm.
-- [ ] 4 pesa valmis sildile (Atom + klaas), iga pesa ≈ 26–28 mm.
+- [ ] 4 pesa valmis sildile (Atom + klaas), iga pesa 24,4–25 mm (lõtk 0,2–0,5 mm; väljundis veidi suurem).
 - [ ] Suuremad kaldservad kui sisendil: 2–3 mm, 45° (robot paneb ebatäpsemalt).
 - [ ] Inimene saab detailid välja võtta (väljalõige servas või väljalükkeauk põhjas).
 - [ ] Prindi ja kontrolli.
