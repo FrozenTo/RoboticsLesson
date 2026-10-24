@@ -76,3 +76,25 @@
 - Kasutaja määras uueks paberi algusnurgaks pen-tip pose X=261.51, Y=-153.01, Z=-188.00, R=-162.37.
 - Drawer piirid nihutati sinna, säilitades +Y suunas 260 mm laiuse, +X suunas 123 mm kõrguse ja Z=-198 mm kontaktpinna.
 - `robot_start_pose.json` uuendati ning `letter_cursor.json` algusnihe on 0 mm.
+
+## 24.10.26 — kasutaja ja Codex
+
+### Tegime
+- Loodi Labori 2 dokument `lab2/README.md` Falstadi simulatsiooni arengu kirjeldamiseks.
+- Kasutaja esitatud algsed kuvatõmmised salvestati kausta `lab2/docs/images/`: esmalt maksimaalne puhumine, seejärel maksimaalne imemine.
+
+### Juhtus
+- Puhumise kuvatõmmisel on sisend 2,3 V ja väljund 3,3 V; imemise kuvatõmmisel on sisend 345 mV ja väljund 200,4 mV.
+- Dokumenteeriti kuvatõmmistel näidatud simulatsiooniväärtused. Füüsilise skeemi mõõtmisi selles töös ei tehtud.
+
+### Otsustasime, ja miks
+- Pildid on eraldi failid ja kuvatakse Labori 2 README-s koos pealdistega, et simulatsiooni mõlemad olekud oleksid võrreldavad.
+
+### Lahti järgmiseks korraks
+- Lisada kuvatõmmistele vastava Falstadi skeemi jagamislink või eksporditud lähtefail.
+
+### Lisandus 24.10.26 — Labori 2 tööjuhend
+- Kasutaja esitatud `Smart Solutions [Lab 2] EST.md` lisati faili `lab2/README.md` täieliku tööjuhendina.
+- Senised Falstadi märkmed ja mõlema kuvatõmmise lingid säilitati README lõpus.
+- Sama töösessiooni käigus lisati Andmehõive tööjuhend faili `../Data-Aq/lab2/README.md`.
+- Tööjuhendite ülesandeid selles töös ei täidetud; uusi riistvaramõõtmisi ei tehtud.

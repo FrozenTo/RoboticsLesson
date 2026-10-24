@@ -28,3 +28,11 @@ Software verification follow-up: the AtomS3 compile-only test passed with
 Espressif32 7.1.3, M5Unified 0.2.21, and M5GFX 0.2.28. The initial M5AtomS3
 library test failed because dependencies were missing; the documented setup
 uses M5Unified instead. No firmware was uploaded.
+
+## 2026-10-24 — Lab 2 handout import
+
+- People present: not recorded; documentation import performed by Codex at the user's request.
+- Work: copied `Data Acquisition [Lab 2] EST.md` into `lab2/README.md` without changing its contents.
+- Measured values: no measurements taken; hardware was not tested.
+- Decisions: use the supplied Estonian handout as the Lab 2 README and preserve its requirements and unfinished fields.
+- Next session: fill in the Lab 2 results as the laboratory work progresses.
