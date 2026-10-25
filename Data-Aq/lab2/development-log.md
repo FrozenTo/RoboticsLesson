@@ -19,3 +19,11 @@
     - difference approximately `1.58×`, close to the calculated `1.59×` gain.
 - **Decisions:** use the measured sensor behaviour instead of blindly using the example values from the Lab 2 instructions. Keep the first Falstad target at approximately `0.20–3.30 V` so the first physical version can be compared with the ideal simulation. Use stable measurement regions rather than isolated ADC/voltage peaks.
 - **Next session:** build the first LM358 version on the breadboard, measure the real 5 V supply voltage, measure output at vacuum/room/blow pressure points with a multimeter, and compare the real circuit with the Falstad calculation. Capture sensor input and op-amp output simultaneously with the oscilloscope.
+
+## 2026-10-25 — Pressure monitor log publication
+
+- **People present:** not recorded; repository synchronization performed by Codex at the user's request.
+- **Work:** added the user's `Tool_logs25102026.md` pressure monitor output to version control.
+- **Measured values:** no new measurements taken during synchronization; the supplied readings are preserved as written and were not independently validated.
+- **Decisions:** retain the original log without correcting or filtering its readings.
+- **Next session:** continue the Lab 2 measurements and compare the recorded output with the sensor and op-amp configuration.
