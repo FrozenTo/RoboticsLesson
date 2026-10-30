@@ -7,8 +7,6 @@
 
 ## 1. 3D Printing & CAD — physical workspace
 
-**Responsible:** ____________________
-
 - [ ] Measure the AtomS3, glass and battery module; decide the Gridfinity layout.
 - [ ] Print and test a correctly fitting Gridfinity calibration holder.
 - [ ] Design and print input, assembly, finished-product and reject holders.
@@ -18,8 +16,6 @@
 
 ## 2. Data Acquisition — vacuum sensor
 
-**Responsible:** ____________________
-
 - [ ] Calculate current sensor/ADC range and resolution from Lab 1 measurements.
 - [ ] Design and simulate the signal-conditioning circuit in Falstad.
 - [ ] Build the circuit and measure it at three pressure levels; correct any discrepancies.
@@ -28,8 +24,6 @@
 - [ ] Complete documentation, required parts list and Git tag `data-acquisition-lab2`.
 
 ## 3. Smart Solutions — server, tasks and cameras
-
-**Responsible:** ____________________
 
 - [ ] Generate per-computer SSH keys and receive the DigitalOcean droplet access details.
 - [ ] Secure the droplet (SSH, firewall, updates, HTTPS) and deploy the Flask website.
