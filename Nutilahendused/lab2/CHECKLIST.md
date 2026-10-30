@@ -232,7 +232,6 @@ Iga kaamera kohta: viide (sündmus → nähtav), kaadrid sekundis, ribalaius.
 
 - [ ] `README.md`: täida kõik `KAARDISTA ISE` kohad — numbrid, ühikud, kus fail asub, ja tegemata asja kohta üks rida, miks.
 - [ ] `README.md`: skeemid ja simulatsioonid pildina **pluss link elavale failile**, et teine saaks edasi muuta.
-- [ ] Falstad simulatsiooni lähtefail: lisa jagamislink või ekspordi skeem `docs/`-i (README-s on see praegu `TODO`).
 - [ ] `docs/server_api.md` valmis ja vastab jooksvale koodile.
 - [ ] `docs/atom_page.md` valmis ja vastab jooksvale püsivarale.
 - [ ] Ohutuskokkulepe commititud.

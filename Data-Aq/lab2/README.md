@@ -258,3 +258,40 @@ Omadussõnad ei ole tulemused. "Andur oli mürane" ei ole midagi; "±14 LSB rahu
 * Mida järgmine labor peaks enne alustamist teadma:
 
 ### Tagasiside
+
+---
+
+
+## Falstadi simulatsiooni areng
+
+Allpool on kaks kasutaja esitatud kuvatõmmist rõhuanduri signaali
+operatsioonvõimendi skeemi simulatsioonist. Esimene näitab maksimaalset
+puhumist (maximum push), teine maksimaalset imemist (maximum pull).
+Väärtused on loetud kuvatõmmistelt ja kirjeldavad simulatsiooni;
+need ei ole füüsilisel skeemil tehtud mõõtmised.
+
+Mõlemal pildil on võrdluspinge 590 mV ning takistid 100 kΩ ja 59 kΩ.
+
+| Järjekord | Olek | Sisendpinge | Väljundpinge |
+|---|---|---:|---:|
+| 1 | Maksimaalne puhumine (maximum push) | 2,3 V | 3,3 V |
+| 2 | Maksimaalne imemine (maximum pull) | 345 mV | 200,4 mV |
+
+### 1. Maksimaalne puhumine (maximum push)
+
+![Falstadi simulatsioon: maksimaalne puhumine, sisend 2,3 V ja väljund 3,3 V](docs/images/falstad-01-maximum-push.png)
+
+Esimene kuvatõmmis: maksimaalse puhumise korral on skeemi sisendis
+2,3 V ja väljundis 3,3 V.
+
+### 2. Maksimaalne imemine (maximum pull)
+
+![Falstadi simulatsioon: maksimaalne imemine, sisend 345 mV ja väljund 200,4 mV](docs/images/falstad-02-maximum-pull.png)
+
+Teine kuvatõmmis: maksimaalse imemise korral on skeemi sisendis
+345 mV ja väljundis 200,4 mV.
+
+### Simulatsiooni lähtefail
+
+TODO: lisa nendele kuvatõmmistele vastava Falstadi skeemi jagamislink
+või eksporditud lähtefail kausta `docs/`, et skeemi saaks edasi muuta.
