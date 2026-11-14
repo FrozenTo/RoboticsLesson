@@ -37,7 +37,6 @@ Saadud kaadrite järjestus (originaalide nimed kasutaja saadetud failidel):
 5. `1000017423.jpg` — hästi nähtav tõus ja stabiliseerumine (kasulik näidisfoto).
 6. `1000017424.jpg` — hästi nähtav langus ja stabiliseerumine; automaatmõõtmiste tabel pärineb sellest kaadrist.
 
-**Pildifailide olek:** originaalfotod saadeti vestluses; nende binaarfailid tuleb eraldi GitHubi `docs/images/` kausta laadida. Siin on säilitatud kontrollitavad originaalnimed ja ekraaninäidud. See tekst ei väida, et originaal-JPEG on juba GitHubis olemas.
 
 ## Mõõtmise piirangud ja ohutus
 
