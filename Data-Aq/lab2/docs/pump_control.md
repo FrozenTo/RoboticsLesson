@@ -60,6 +60,39 @@ Näide ainult tööloogika selgitamiseks: kui siht on −20 kPa ja hoidmisrežii
 
 **Logi piirang.** Failis `Tool_logs25102026.md` on pärast käivitumist `Atmospheric reference = 41.3 kPa (LOW)`. Selline tulemus ei sobi kokku varem mõõdetud ~97 kPa atmosfääriga. Üks võimalik põhjus on võimendatud pinge tõlgendamine otseanduri teisendusvalemiga, kuid täpne põhjus vajab kontrollimist. Selle faili `P_gauge` väärtustest ei tohi ilma kalibreerimist kontrollimata teha järeldusi pumba tööaja või lekke kohta.
 
+### 3.1. 25.10.2026 — rõhusignaali logi üksikasjalik ülevaade
+
+**Algallikas:** [`logs/Tool_logs25102026.md`](../logs/Tool_logs25102026.md). Failis on **145 järjestikust mõõterida**, lisaks viiele päisereal. Näidud on kopeeritud seadme jadamonitorist; logi ei sisalda eraldi ajatemplitega CSV-struktuuri.
+
+**Otse logifailist loetud vahemikud:**
+
+| Suurus | Väikseim kirjapandud väärtus | Suurim kirjapandud väärtus |
+| --- | ---: | ---: |
+| ADC toorlugem | 293 | 3543 |
+| `Voltage` | 263 mV | 2879 mV |
+| `P_abs` (programmi arvutatud) | 12,8 kPa | 409,8 kPa |
+| `P_gauge` (programmi arvutatud) | −28,6 kPa | +368,5 kPa |
+
+Jadamonitori väljal `Air` oli 28 korral `LOW`, 116 korral `HIGH` ning ühel korral `NORMAL`. **Need on programmi olekusildid, mitte sõltumatu tõend imemise, puhumise ega haarde kvaliteedi kohta.**
+
+**Mõned kontrollitavad näited mõõteridade järjestusest:**
+
+| Logi rida | `ADC` | `Voltage` | `P_gauge` programmis | Märkus |
+| ---: | ---: | ---: | ---: | --- |
+| 6 | 560 | 456 mV | −0,5 kPa | Esimene salvestatud mõõterida |
+| 21 | 3367 | 2765 mV | +353,4 kPa | Kõrge pingetasemega lõik |
+| 37 | 293 | 307 mV | −28,6 kPa | Madala pingetasemega lõik |
+| 45 | 3197 | 2683 mV | +347,9 kPa | Järgmine kõrge pingetase |
+| 99 | 332 | 311 mV | −27,6 kPa | Madal pingetase |
+| 110 | 334 | 263 mV | −14,3 kPa | Kõige väiksem logis olev `Voltage` |
+| 131 | 1113 | 962 mV | +73,7 kPa | Viimase lõigu näit atmosfäärimõõtmisele lähedase pingega |
+
+Ridade 6–19 pinge jääb peamiselt ligikaudu 0,46–0,49 V lähedale, seejärel muutub signaal suuremaks; hiljem leidub nii umbes 0,30 V kui ka 2,8–2,9 V piirkondi. Viimases lõigus on pinge ligikaudu 0,93–0,97 V. Need on **logitud elektrilised pingetasemed**. Nende põhjal saab öelda, et mõõdetud sisendsignaal muutus katse käigus ulatuslikult, kuid ilma pumba olekut ja katsetingimusi märkiva veeruta ei saa iga lõiku kindlalt omistada ühele füüsilisele katseolukorrale.
+
+**Miks rõhunumbreid tuleb ettevaatlikult kasutada.** Seadme käivitamisel salvestati `Atmospheric reference = 41.3 kPa (LOW)`, mis ei ühti Labor 1 tavapärase ligikaudu 97 kPa näiduga. Laboris 2 kasutati signaalivõimendit ning seetõttu tuleb enne `P_abs` või `P_gauge` tõlgendamist kontrollida, kas püsivara teisendas võimendi väljundpinge tagasi anduri pingeks. Lisaks loeb olemasolev AtomS3R püsivara `ADC`, `Voltage` ja keskmistatud rõhu eri mõõtmishetkedel, seega ei pruugi ühe tekstirea väljad kiiresti muutuva rõhu korral olla täpselt sama hetke näidud. **Selle logi suured positiivsed rõhuväärtused ei ole kinnitatud füüsilise rõhu mõõtmised.**
+
+**Mida fail ei sisalda:** iga mõõterea ajatempel, pumba DO olek või käivituste arv, mõõtmise režiim `config=raw/opamp`, konkreetse haardekatse tähis ning sama impulsi kaks kõrvutatavat signaali. Seetõttu ei saa sellest failist arvutada usaldusväärset käivituste/min arvu, vaakumi püsimise kestust, pooliku haarde eristamise aega ega võrreldavat SNR-i. Vastavad lahtrid jäävad allolevas võrdluses taastamata.
+
 ## 4. Labor 1 ja Labor 2 juhtimise võrdlus
 
 | Näitaja | Labor 1 / toorsignaal | Labor 2 / LM358P |
