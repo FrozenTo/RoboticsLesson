@@ -2,6 +2,66 @@
 
 **Töömaht:** 32 tundi | **Hindamine:** 20 punkti | **Meeskond:** 3 tudengit | **Välja antud:** 07.10.26 | **Tellimise kuupäev:** 16.10.26 | **Esimene kaitsmine:** 29.10.26, veebis
 
+## Meeskonna tegelik töö ja tulemused (ülevaade 14.11.2026)
+
+> See on **meeskonna tulemuste kokkuvõte**. Allpool olev laboriülesanne on säilitatud algsel kujul ja selle näidisarve ei käsitleta meie mõõdetud tulemustena. Mõõdetud, arvutatud ja veel kinnitamata näidud on siin eristatud.
+
+### Eesmärk ja lähteandmed
+
+Labor 1 MPX5700AP rõhuanduri kasutatud mõõtevahemik oli ligikaudu **0,345–2,30 V** (laius 1,955 V, umbes **59,2%** 3,3 V ADC vahemikust). Labor 2 eesmärk oli vähendada signaali nihet ning suurendada ADC-le antavat mõõdetavat pingeulatust. 24.–25.10.2026 ehitasime ja mõõtsime LM358P abil kaks füüsilist võimendusahela versiooni; toitepingeks mõõdeti **5,01 V**.
+
+### Võimendi kaks varianti
+
+| Parameeter | Esimene variant | Parandatud variant |
+| --- | ---: | ---: |
+| Tagasiside takistid | 51 + 10 = 61 kΩ | 27 + 10 = 37 kΩ |
+| Takisti võrdluspinge poole | 100 kΩ | 100 kΩ |
+| Arvutuslik võimendus | 1,61× | 1,37× |
+| Seatud võrdluspinge | 0,590 V | 0,467 V |
+| Sihtväljund | 0,20–3,30 V | 0,30–3,00 V |
+| Täisvaakumis mõõdetud väljund | 0,200 V | 0,300 V |
+| Atmosfääril mõõdetud väljund | u 0,960 V | 0,963 V |
+| Puhumisel mõõdetud väljund | 3,124 V | 2,800 V |
+
+Kasutatud seos: `U_out = (1 + Rf / 100 kΩ) · U_sensor − (Rf / 100 kΩ) · U_ref`. Parandatud variandi arvutuslik väljund on sisendi 0,345 V korral umbes **0,300 V** ja sisendi 2,30 V korral umbes **2,978 V**. Need on **valemist arvutatud**, mitte samaaegselt mõõdetud sisend-väljundpaarid. Võimendi mõõdetud väljund puhumisel oli 2,800 V; ülemise sihi täpset saavutamist ei ole kinnitatud.
+
+**Simulatsioonide võrdlus:** algses Falstadi mudelis kasutati 59 kΩ tagasisidet (1,59×), esimese füüsilise skeemi aruandes on 61 kΩ (1,61×). Parandatud skeemi Falstadi pildid ning [imporditav lähtefail](docs/falstad-corrected-circuit.txt) on allpool [simulatsiooni osas](#falstadi-simulatsiooni-areng). Arenduspäevikus kirjeldatakse ka 10 mV suurusjärgus müraallikaga tehtud simulatsiooni. Falstadi väärtusi ja reaalse makettplaadi mõõtmisi ei tohi omavahel segi ajada.
+
+### ADC samm ja mõõtelogi
+
+MPX5700AP nominaalse tundlikkuse, umbes 5 V toite ja 12-bitise 0–3,3 V ADC eeldusel on **teoreetiline** rõhusamm enne võimendit umbes **125 Pa/samm**, pärast 1,37× võimendust umbes **91 Pa/samm**. See on lahutusvõime arvutus, **mitte mõõdetud SNR-i paranemine**.
+
+[25.10.2026 rõhulogis](logs/Tool_logs25102026.md) on **145 mõõterida**: ADC vahemikus **293–3543**, pinge vahemikus **263–2879 mV**. Programmi kuvatud `P_abs` oli 12,8–409,8 kPa ja `P_gauge` −28,6 kuni +368,5 kPa. Neid rõhunumbreid ei saa otse kinnitatud tegelikuks rõhuks pidada: käivituse atmosfäärinäit **41,3 kPa** ei sobi varasema ligikaudu 97 kPa näiduga. Rõhu teisendus võimendi järel vajab kontrollimist. Logis ei ole katsete ajatemplite, pumba ON/OFF ega `raw/opamp` konfiguratsiooni veerge.
+
+### Failid ja tööde hetkeseis
+
+| Tõendusmaterjal | Asukoht / märkus |
+| --- | --- |
+| Kahe füüsilise variandi aruanne | [`docs/Lab2_aruande.md`](docs/Lab2_aruande.md) |
+| Esimese ebaõnnestunud kokkupaneku ajalugu | [`docs/Lab2_aruande_old.md`](docs/Lab2_aruande_old.md), **mitte lõplik skeem** |
+| Arenduspäevik | [`docs/development-log.md`](docs/development-log.md) |
+| Falstadi pildid ja parandatud skeemi eksport | [`docs/images/`](docs/images/), [`docs/falstad-corrected-circuit.txt`](docs/falstad-corrected-circuit.txt) |
+| Kasutatud komponendid ja tellimisvajadus | [`docs/bom.md`](docs/bom.md); **16.10 ostutellimuse esitamine ei ole kinnitatud** |
+| Pumba juhtimine ja taastatud katsetulemused | [`docs/pump_control.md`](docs/pump_control.md) |
+| Originaalsed oktoobri mõõteread | [`logs/Tool_logs25102026.md`](logs/Tool_logs25102026.md) |
+| AtomS3R rõhumonitor | [`main.cpp`](../../Nutilahendused/lab1/sketch_sep12a/src/main.cpp), teise aine kaustas |
+| Python jadaliidese logija | [`log_serial.py`](../../Nutilahendused/lab1/sketch_sep12a/tools/log_serial.py) |
+| Pumba juhtimise Python-kood | [`suck_until_pressure.py`](../../Nutilahendused/lab1/sketch_sep12a/tools/suck_until_pressure.py) |
+| MG400 kohalik veebirakendus | [`server.py`](../../MG400%20python%20apps/mg400_grid_website_v18/server.py) |
+| Labor 1 ja projekti juhised | [`../lab1/README.md`](../lab1/README.md), [`../AGENTS.md`](../AGENTS.md) |
+
+**Kinnitatud:** vooluringi kokkupanek, kahe versiooni multimeetrimõõtmised kolmes rõhuolukorras, Falstadi simulatsioonid, komponentide loend, osa programme ja elektriliste väärtustega logi.
+
+**Osaliselt dokumenteeritud või kinnitamata:** kahekanaliline ostsilloskoobipilt, sama pumba impulsi vähemalt 30 mõõtmist mõlemas `raw/opamp` konfiguratsioonis koos ajatempliga CSV-s, võrreldavad spektrid ja SNR, kolme haardeolukorra pumba käivitused minutis ning `poolik haare` tuvastamise aeg sekundites. Meeskonna kinnitusel tehti pumbakatsed, kuid nimetatud arvulisi kokkuvõtteid ei saa säilinud failidest usaldusväärselt taastada. Ka Labor 2 eraldi `src/`, `data/`, `notebooks/` ja Git tag `data-acquisition-lab2` vajavad veel korrastamist.
+
+**Ohutus:** LM358P töötab 5 V toitega, kuid AtomS3R ADC sisendile ei tohi anda rohkem kui **3,3 V**. Enne ADC ühendamist ja pärast skeemi muutmist tuleb väljund mõõta multimeetriga.
+
+---
+
+## Õppejõu algne laboriülesanne (säilitatud)
+
+Järgnev on algne ülesandetekst koos nõuete kontrollnimekirjaga. Ülal on meie töö tegelikud tulemused; lõpetamata tööde ruute ei ole siin automaatselt märgitud.
+
 ### Kuidas see dokument töötab
 
 * Repo ja töökord on Laborist 1 olemas ja samad.
