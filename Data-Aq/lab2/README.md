@@ -51,7 +51,8 @@ MPX5700AP nominaalse tundlikkuse, umbes 5 V toite ja 12-bitise 0–3,3 V ADC eel
 | Labor 2 lähtekood ja ajaloolise Atomi püsivara koopia | [`src/README.md`](src/README.md), [`src/atom_pressure_original/`](src/atom_pressure_original/) |
 | **Uus eraldi 100 Hz Lab 2 püsivara (katsetamata)** | [`src/atom_pressure_100hz/`](src/atom_pressure_100hz/), [`src/capture_100hz.py`](src/capture_100hz.py). Originaalset Nutilahendused programmi ei muudeta. |
 | 25.10 tekstlogist taastatud 145-realine CSV | [`data/pressure_20261025_legacy.csv`](data/pressure_20261025_legacy.csv), [`data/README.md`](data/README.md); `config=unverified`, puuduvad ajatemplid |
-| Jupyter analüüsi alus | [`notebooks/pressure_analysis.ipynb`](notebooks/pressure_analysis.ipynb), [`notebooks/README.md`](notebooks/README.md); spektrite/SNR võrdlus ootab ehtsaid ajatempliga raw/opamp logisid |
+| Jupyter ja olemasolevate pärisandmete graafikud | [`notebooks/pressure_analysis.ipynb`](notebooks/pressure_analysis.ipynb), [`notebooks/README.md`](notebooks/README.md); nüüd kaks Labor 1 raw ajagraafikut ja üks Labor 2 järjekorranumbri graafik; mõõdetud SNR veel kinnitamata |
+| Signaalianalüüsi aruanne | [`docs/signal_analysis.md`](docs/signal_analysis.md) — 129 + 983 + 145 päris mõõterida, kirjeldav pinge kõikumine ning ADC teoreetiline resolutsioon; raw/opamp SNR ei ole tõendatud |
 | Labor 1 ja projekti juhised | [`../lab1/README.md`](../lab1/README.md), [`../AGENTS.md`](../AGENTS.md) |
 
 **Kinnitatud:** vooluringi kokkupanek, kahe versiooni multimeetrimõõtmised kolmes rõhuolukorras, Falstadi simulatsioonid, komponentide loend, osa programme ja elektriliste väärtustega logi.
