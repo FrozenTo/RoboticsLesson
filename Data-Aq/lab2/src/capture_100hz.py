@@ -73,9 +73,7 @@ def main() -> int:
     print("WARNING: Phase and trial-id are user-entered, not sensor measurements.")
 
     try:
-        with serial.Serial(args.port, args.baud, timeout=0.2, dsrdtr=False, rtscts=False) as port:
-            port.dtr = False
-            port.rts = False
+        with serial.Serial(args.port, args.baud, timeout=2) as port:
             with args.output.open("w", newline="", encoding="utf-8") as fh:
                 writer = csv.DictWriter(fh, fieldnames=HEADER)
                 writer.writeheader()
