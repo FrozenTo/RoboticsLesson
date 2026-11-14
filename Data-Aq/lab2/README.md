@@ -261,37 +261,43 @@ Omadussõnad ei ole tulemused. "Andur oli mürane" ei ole midagi; "±14 LSB rahu
 
 ---
 
-
 ## Falstadi simulatsiooni areng
 
-Allpool on kaks kasutaja esitatud kuvatõmmist rõhuanduri signaali
-operatsioonvõimendi skeemi simulatsioonist. Esimene näitab maksimaalset
-puhumist (maximum push), teine maksimaalset imemist (maximum pull).
-Väärtused on loetud kuvatõmmistelt ja kirjeldavad simulatsiooni;
-need ei ole füüsilisel skeemil tehtud mõõtmised.
+### Esialgne simulatsioon
 
-Mõlemal pildil on võrdluspinge 590 mV ning takistid 100 kΩ ja 59 kΩ.
+Esimene Falstadi variant loodi enne füüsilise makettplaadi lõplikku skeemi ülevaatamist. See kasutas mõõdetud andurivahemikku umbes `0,345–2,30 V`, ideaalset `590 mV` viitepingeallikat, `100 kΩ` takistit ja `59 kΩ` tagasisidetakistit. Simulatsioon andis ligikaudu `0,20 V` täisvaakumis ja `3,30 V` maksimaalse puhumise juures.
 
-| Järjekord | Olek | Sisendpinge | Väljundpinge |
-|---|---|---:|---:|
-| 1 | Maksimaalne puhumine (maximum push) | 2,3 V | 3,3 V |
-| 2 | Maksimaalne imemine (maximum pull) | 345 mV | 200,4 mV |
+See variant oli matemaatiliselt sobiv esimese 0,20–3,30 V sihi kontrollimiseks, kuid ei kopeerinud täpselt hiljem päriselt ehitatud skeemi: päris skeemis tekitati viitepinge B100K potentsiomeetriga ja lõplikus parandatud variandis oli tagasiside `27 kΩ + 10 kΩ = 37 kΩ`.
 
-### 1. Maksimaalne puhumine (maximum push)
+![Esialgne Falstadi simulatsioon: maksimaalne puhumine](docs/images/falstad-01-maximum-push.png)
 
-![Falstadi simulatsioon: maksimaalne puhumine, sisend 2,3 V ja väljund 3,3 V](docs/images/falstad-01-maximum-push.png)
+![Esialgne Falstadi simulatsioon: maksimaalne imemine](docs/images/falstad-02-maximum-pull.png)
 
-Esimene kuvatõmmis: maksimaalse puhumise korral on skeemi sisendis
-2,3 V ja väljundis 3,3 V.
+### Parandatud simulatsioon — päris makettplaadi järgi
 
-### 2. Maksimaalne imemine (maximum pull)
+30.10.2026 ehitati Falstadi skeem uuesti nii, et ühendused ja komponendid vastaksid parandatud füüsilisele makettplaadile:
 
-![Falstadi simulatsioon: maksimaalne imemine, sisend 345 mV ja väljund 200,4 mV](docs/images/falstad-02-maximum-pull.png)
+- toide `5,01 V`;
+- MPX5700AP modelleeritakse pingeallikana, kasutatav sisendvahemik umbes `0,345–2,30 V`;
+- B100K potentsiomeeter on ühendatud 5 V ja GND vahele ning selle liugur tekitab umbes `0,467 V` viitepinge;
+- viitepinge läheb `100 kΩ` kaudu LM358 inverteerivale sisendile;
+- anduri väljund läheb otse mitteinverteerivale sisendile;
+- väljundist läheb inverteerivale sisendile tagasiside läbi `27 kΩ + 10 kΩ = 37 kΩ`;
+- Falstadi op-ampi väljundpiiriks seati `0…3,5 V`, et mudel oleks LM358-le lähemal.
 
-Teine kuvatõmmis: maksimaalse imemise korral on skeemi sisendis
-345 mV ja väljundis 200,4 mV.
+Parandatud astme seos on ligikaudu
+
+`Uväl = 1,37 · Uandur − 0,37 · Uref`.
+
+Falstadis saadi täisvaakumi sisendiga `345 mV` väljundiks `301,9 mV`, mis vastab hästi parandatud `0,30 V` alumisele sihile. Sisendiga `2,30 V` jäi väljund ligikaudu `2,9–3,0 V` piirkonda, mis vastab parandatud ülemisele sihile.
+
+![Parandatud Falstad: 2,30 V sisend](docs/images/falstad-corrected-maximum-push.png)
+
+![Parandatud Falstad: 345 mV sisend](docs/images/falstad-corrected-maximum-pull.png)
 
 ### Simulatsiooni lähtefail
 
-TODO: lisa nendele kuvatõmmistele vastava Falstadi skeemi jagamislink
-või eksporditud lähtefail kausta `docs/`, et skeemi saaks edasi muuta.
+Parandatud skeemi saab Falstadi uuesti importida failist [`docs/falstad-corrected-circuit.txt`](docs/falstad-corrected-circuit.txt). Falstadis vali **File → Import From Text** ja kleebi faili sisu importaknas olevasse tekstivälja.
+
+Märkus mõõtelogide kohta: Lab 2 logides nähtavaid umbes `300 mV` väärtusi ei kasutata automaatselt toore MPX5700AP minimaalse sisendpingena. Toore anduri vahemik `~0,345–2,30 V` pärineb varasematest otsestest andurimõõtmistest; parandatud astme enda alumine väljundsiht on `~0,30 V`. Logi konfiguratsioon tuleb enne toore anduri kalibreerimiseks kasutamist eraldi kinnitada.
+

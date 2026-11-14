@@ -49,3 +49,20 @@ Kontrollisime B100K tööd: selle väljund oli pööramisega muudetav ligikaudu 
 Andmesalvestus AtomS3R kaudu tehti eraldi; toor- ja võimendatud signaali logifailid ning edasine spektri/SNR analüüs lisatakse eraldi. ADC sisendi lubatud pinge ei tohi ületada 3,3 V; seda tuleb jälgida ka järgmistes katsetes.
 
 Kokkuvõte: valmistasime ja testisime päris komponentidega kaks võimendi versiooni, mõõtsime kolme rõhuolukorda, leidsime kontaktivea ning kohandasime ahela 0,3–3,0 V sihtvahemikule.
+
+## Falstadi simulatsiooni parandamine — 30.10.2026
+
+Esialgne Falstadi skeem kasutas ideaalset 590 mV viitepingeallikat ja 59 kΩ tagasisidetakistit. Pärast füüsilise makettplaadi ja mõõtetulemuste võrdlemist tegime simulatsiooni uuesti nii, et see vastaks parandatud päris skeemile.
+
+Parandatud Falstadi mudelis on toide 5,01 V, viitepinge tekib B100K potentsiomeetri liugurilt, viitepinge jõuab inverteerivale sisendile läbi 100 kΩ takisti ning tagasiside koosneb kahest jadamisi takistist 27 kΩ + 10 kΩ = 37 kΩ. Anduri väljund läheb LM358 mitteinverteerivale sisendile. Op-ampi väljundpiir seati simulatsioonis 0…3,5 V.
+
+Parandatud mudeliga saime:
+- `Uandur = 0,345 V → Uväl = 0,3019 V`;
+- `Uandur = 2,30 V → Uväl ≈ 2,9–3,0 V`.
+
+Need tulemused vastavad parandatud sihtvahemikule 0,30–3,00 V ning on kooskõlas füüsilise skeemi arvutusega `Uväl = (1 + 37/100) · Uandur − (37/100) · Uref`.
+
+Simulatsiooni kuvatõmmised on failides `docs/images/falstad-corrected-maximum-pull.png` ja `docs/images/falstad-corrected-maximum-push.png`. Falstadi imporditav lähtefail on `docs/falstad-corrected-circuit.txt`.
+
+Oluline täpsustus: Lab 2 monitorilogis esinevaid umbes 300 mV väärtusi ei käsitleta automaatselt toore anduri minimaalse väljundina. Toore MPX5700AP kasutatud sisendvahemik jäi varasemate otseste mõõtmiste põhjal umbes 0,345–2,30 V juurde; umbes 0,30 V on parandatud op-amp astme alumine väljundsiht.
+

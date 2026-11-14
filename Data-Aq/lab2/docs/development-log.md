@@ -27,3 +27,21 @@
 - **Measured values:** no new measurements taken during synchronization; the supplied readings are preserved as written and were not independently validated.
 - **Decisions:** retain the original log without correcting or filtering its readings.
 - **Next session:** continue the Lab 2 measurements and compare the recorded output with the sensor and op-amp configuration.
+
+## 2026-10-30 — Falstad circuit corrected to match the physical build
+
+- **People present:** not recorded; this entry documents Toomas's Falstad and documentation work based on the team's physical Lab 2 circuit.
+- **Work:** compared the earlier Falstad model with the real breadboard and the Lab 2 report, then rebuilt the simulation to match the corrected physical circuit instead of the earlier simplified version.
+- **Measured/simulated values:**
+  - raw sensor range retained from the direct measurements: approximately `0.345–2.30 V`;
+  - real supply used in the model: `5.01 V`;
+  - B100K potentiometer used for the reference voltage, approximately `0.467 V`;
+  - reference resistor: `100 kΩ`;
+  - feedback: `27 kΩ + 10 kΩ = 37 kΩ`;
+  - calculated closed-loop gain: approximately `1.37×`;
+  - Falstad: `0.345 V → 0.3019 V`;
+  - Falstad: `2.30 V → approximately 2.9–3.0 V`.
+- **Decisions:** keep the earlier Falstad screenshots as documentation of the first version, but use the corrected B100K/37 kΩ model as the current simulation. Do not treat approximately 300 mV values from the Lab 2 monitor log as raw sensor calibration values without first confirming whether the logger was reading the raw sensor or the conditioned op-amp output.
+- **Files:** corrected screenshots are stored in `docs/images/`; the importable Falstad source is `docs/falstad-corrected-circuit.txt`.
+- **Next session:** continue with raw-vs-op-amp logging, oscilloscope comparison, Pa/ADC-step and SNR analysis.
+
