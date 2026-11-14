@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Lab 2 — Post Office</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 980px; margin: 2rem auto; padding: 0 1rem; }
+    form, section { border: 1px solid #bbb; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    label { display: block; margin: .5rem 0; }
+    input, select, button { font: inherit; padding: .45rem; }
+    table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+    th, td { border-bottom: 1px solid #ddd; padding: .45rem; text-align: left; vertical-align: top; }
+    code { background: #eee; padding: .1rem .3rem; }
+    .muted { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>Smart Lab 2 — Post Office</h1>
+  <p class="muted">Local development page. A job is a complete approved task, never an arbitrary robot movement.</p>
+
+  <section>
+    <h2>Atom status</h2>
+    {% if atom %}
+      <p><strong>{{ atom.device }}</strong> — last seen {{ atom.last_seen }}</p>
+      <p>Robot: {{ atom.robot_state or 'unknown' }}{% if atom.pressure_kpa is not none %}, pressure: {{ atom.pressure_kpa }} kPa{% endif %}</p>
+    {% else %}
+      <p>No Atom has polled this server yet.</p>
+    {% endif %}
+  </section>
+
+  <form id="jobForm">
+    <h2>Submit approved job</h2>
+    <label>Job
+      <select name="job" id="job">
+        {% for job in allowed_jobs %}<option value="{{ job }}">{{ job }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Argument (only <code>letter</code> uses this for now)
+      <input name="arg" id="arg" maxlength="20" placeholder="A">
+    </label>
+    <button type="submit">Submit</button>
+    <span id="result"></span>
+    <p class="muted">Pending jobs expire after {{ ttl }} seconds (development setting).</p>
+  </form>
+
+  <section>
+    <h2>Recent jobs</h2>
+    <table>
+      <thead><tr><th>ID</th><th>Job</th><th>Arg</th><th>State</th><th>Created</th><th>Result / reason</th></tr></thead>
+      <tbody>
+      {% for j in jobs %}
+        <tr><td>{{ j.id }}</td><td>{{ j.job }}</td><td>{{ j.arg or '' }}</td><td>{{ j.state }}</td><td>{{ j.created_at }}</td><td>{{ j.result or '' }} {{ j.why or '' }}</td></tr>
+      {% else %}
+        <tr><td colspan="6">No jobs yet.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+<script>
+const form = document.getElementById('jobForm');
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const job = document.getElementById('job').value;
+  const arg = document.getElementById('arg').value;
+  const response = await fetch('/api/jobs', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({job, arg})
+  });
+  const data = await response.json();
+  document.getElementById('result').textContent = response.ok ? ('Queued #' + data.id) : (data.error || 'Error');
+  if (response.ok) setTimeout(() => location.reload(), 400);
+});
+</script>
+</body>
+</html>
