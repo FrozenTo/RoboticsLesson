@@ -33,6 +33,12 @@ MPX5700AP nominaalse tundlikkuse, umbes 5 V toite ja 12-bitise 0–3,3 V ADC eel
 
 [25.10.2026 rõhulogis](logs/Tool_logs25102026.md) on **145 mõõterida**: ADC vahemikus **293–3543**, pinge vahemikus **263–2879 mV**. Programmi kuvatud `P_abs` oli 12,8–409,8 kPa ja `P_gauge` −28,6 kuni +368,5 kPa. Neid rõhunumbreid ei saa otse kinnitatud tegelikuks rõhuks pidada: käivituse atmosfäärinäit **41,3 kPa** ei sobi varasema ligikaudu 97 kPa näiduga. Rõhu teisendus võimendi järel vajab kontrollimist. Logis ei ole katsete ajatemplite, pumba ON/OFF ega `raw/opamp` konfiguratsiooni veerge.
 
+### 14.11.2026 — kahekanaliline ostsilloskoobivaatlus
+
+14.11.2026 salvestati GW Instek GDS-1072A-U ostsilloskoobil CH1 (kollane) ja CH2 (sinine) rõhumuutusele reageerivad signaalid. Mõlemad jäljed on samal ekraanil ning fotodel on nähtavad nii signaalitaseme tõus kui ka langus. Mõõterežiimis kuvati ajabaas **500 ms/div (ROLL)**. Ühel fotol on **Vmax CH1 = 2,64 V**, **Vmax CH2 = 1,89 V**, **Vmin CH1 = 0,00 V**, **Vmin CH2 = 0,60 V**, **Vpp CH1 = 2,64 V** ning **Vpp CH2 = 1,29 V**. Need on ekraanilt loetud väärtused, mitte valideeritud gain/SNR-i tulemus.
+
+Mõõteprotseduur, fotode tähendus ja piirangud: [`docs/oscilloscope_2026-11-14.md`](docs/oscilloscope_2026-11-14.md). Kanalite mõõtepunktide ja 1×/5×/10× sondi koefitsientide vastavus vajab lõpliku pingevõrdluse jaoks kinnitamist. Foto ei asenda 30 + 30 impulsi ajatemplitega CSV-d, spektrit ega mõõdetud SNR-i.
+
 ### Failid ja tööde hetkeseis
 
 | Tõendusmaterjal | Asukoht / märkus |
@@ -57,7 +63,7 @@ MPX5700AP nominaalse tundlikkuse, umbes 5 V toite ja 12-bitise 0–3,3 V ADC eel
 
 **Kinnitatud:** vooluringi kokkupanek, kahe versiooni multimeetrimõõtmised kolmes rõhuolukorras, Falstadi simulatsioonid, komponentide loend, osa programme ja elektriliste väärtustega logi.
 
-**Osaliselt dokumenteeritud või kinnitamata:** kahekanaliline ostsilloskoobipilt, sama pumba impulsi vähemalt 30 mõõtmist mõlemas `raw/opamp` konfiguratsioonis koos ajatempliga CSV-s, võrreldavad spektrid ja SNR, kolme haardeolukorra pumba käivitused minutis ning `poolik haare` tuvastamise aeg sekundites. Meeskonna kinnitusel tehti pumbakatsed, kuid nimetatud arvulisi kokkuvõtteid ei saa säilinud failidest usaldusväärselt taastada. Labor 2 kaustades `src/`, `data/` ja `notebooks/` on nüüd eraldi lähtekoodikoopiad, tegelikust tekstlogist teisendatud CSV ning analüüsi ettevalmistav notebook (vt allpool). Lisaks on `src/atom_pressure_100hz/` all **eraldiseisev uus kavandatud 100 Hz püsivara** ja `src/capture_100hz.py` logija; neid ei ole seni päris AtomS3R-ga kompileeritud ega mõõdetud. See **ei tähenda**, et 100 Hz võrdluskatsed või tegelik SNR oleksid juba valmis. Git tag `data-acquisition-lab2` on endiselt puudu.
+**Osaliselt dokumenteeritud või kinnitamata:** kahekanalilised ostsilloskoobivaatlused on kirjeldatud (fotode GitHubi lisamine veel pooleli), kuid sondide skaalakoefitsientide kontroll ja võrreldav arvuline analüüs puuduvad; sama pumba impulsi vähemalt 30 mõõtmist mõlemas `raw/opamp` konfiguratsioonis koos ajatempliga CSV-s, võrreldavad spektrid ja SNR, kolme haardeolukorra pumba käivitused minutis ning `poolik haare` tuvastamise aeg sekundites. Meeskonna kinnitusel tehti pumbakatsed, kuid nimetatud arvulisi kokkuvõtteid ei saa säilinud failidest usaldusväärselt taastada. Labor 2 kaustades `src/`, `data/` ja `notebooks/` on nüüd eraldi lähtekoodikoopiad, tegelikust tekstlogist teisendatud CSV ning analüüsi ettevalmistav notebook (vt allpool). Lisaks on `src/atom_pressure_100hz/` all **eraldiseisev uus kavandatud 100 Hz püsivara** ja `src/capture_100hz.py` logija; neid ei ole seni päris AtomS3R-ga kompileeritud ega mõõdetud. See **ei tähenda**, et 100 Hz võrdluskatsed või tegelik SNR oleksid juba valmis. Git tag `data-acquisition-lab2` on endiselt puudu.
 
 **Ohutus:** LM358P töötab 5 V toitega, kuid AtomS3R ADC sisendile ei tohi anda rohkem kui **3,3 V**. Enne ADC ühendamist ja pärast skeemi muutmist tuleb väljund mõõta multimeetriga.
 

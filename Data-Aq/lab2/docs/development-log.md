@@ -45,3 +45,14 @@
 - **Files:** corrected screenshots are stored in `docs/images/`; the importable Falstad source is `docs/falstad-corrected-circuit.txt`.
 - **Next session:** continue with raw-vs-op-amp logging, oscilloscope comparison, Pa/ADC-step and SNR analysis.
 
+
+## 2026-11-14 — Kahekanaliline ostsilloskoobivaatlus
+
+- **Osalejad:** mõõtmisi teinud meeskonnaliige; teiste kohalviibijate nimed ei ole fikseeritud.
+- **Tehtud:** vaadeldi GW Instek GDS-1072A-U kahekanalilisi jälgi rõhusignaali suurenemisel ja vähenemisel. CH1 kollane ja CH2 sinine jälg olid samal ekraanil. Pärast katset edastati kuus fotot tulemuse dokumenteerimiseks; ahelat uue aruande koostamisel ümber ei ehitatud.
+- **Seadistus ekraanil:** ajabaas 500 ms/div (ROLL). Vertikaalskaalad muutusid fotoseeria vältel (eri fotodel muu hulgas 500 mV/div ning hiljem 2 V/div CH1 ja 2,5 V/div CH2).
+- **Ekraanilt loetud väärtused ühel fotol:** CH1 Vmax 2,64 V, Vmin 0,00 V, Vpp 2,64 V; CH2 Vmax 1,89 V, Vmin 0,60 V, Vpp 1,29 V. Need on osaliselt erinevate hetkede ekstreemumid, mitte sama ajahetke kalibreeritud paarismõõtmine.
+- **Järeldus:** mõlemad jäljed reageerisid rõhumuutusele. Enne arvulist võimenduse või SNR-i järeldust tuleb kontrollida mõõtepunktid ja sondi mehaanilise lüliti koefitsiendi vastavus ostsilloskoobi menüü väärtusele.
+- **Ohutus:** LM358 5 V toite puhul ei ole 3,3 V ADC sisendpiiri täitmine kõigis rõhuolukordades tõendatud; AtomS3R G5 oli järgneva mõõtmise ajal lahti ühendatud.
+- **Dokument:** `docs/oscilloscope_2026-11-14.md`.
+- **Edasine töö:** lisada originaalfotod repositooriumi; kui õppejõu hindamiseks tarvis, teha eraldi 30 + 30 ajatemplitega toor-/võimendisignaali mõõtmised ja kinnitada spektreid/SNR-i.
