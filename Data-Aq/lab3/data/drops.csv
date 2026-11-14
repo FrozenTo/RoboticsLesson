@@ -1,0 +1,1 @@
+drop_id,plate_id,row,col,nozzle_id,pressure_kpa,pulse_ms,area_px,mm_per_px,area_mm2,spacer_height_mm,volume_ul,pressure_curve_file,notes
