@@ -1,6 +1,6 @@
 # Labor 2 — analüüs (notebooks)
 
-Avamiseks käivita Jupyter Lab / Notebook ja ava [`pressure_analysis.ipynb`](pressure_analysis.ipynb).
+Avamiseks käivita Jupyter Lab / Notebook ja ava [`pressure_analysis.ipynb`](pressure_analysis.ipynb). Nüüd sisaldab notebook ka **12.09.2026 Labor 1 mõlema ajatempliga logi tegelikke graafikuid** ning kirjeldavat pinge standardhälbe analüüsi. Vahetult GitHubis vaatamiseks on olemas valmis SVG graafikud: [Lab 1 15:43](lab1_raw_154318.svg), [Lab 1 16:47](lab1_raw_164737.svg) ja [Lab 2 25.10](lab2_25102026_sequence.svg). Täpsed tulemused ja SNR-i piirangud: [`../docs/signal_analysis.md`](../docs/signal_analysis.md).
 
 Notebook teeb praegu kolm asja: (1) kontrollib säilitatud 145 mõõterida; (2) joonistab logitud **pinge mõõterea numbri järgi**, ilma väljamõeldud ajateljeta; (3) arvutab nominaalse ADC sammu ning valmistab ette päris `raw/opamp` katsete 100 Hz, 30 impulsi ja ajatempli kontrolli.
 
