@@ -55,6 +55,7 @@ float baselineOpamp = NAN;
 bool calibratedRaw = false;
 bool calibratedOpamp = false;
 float lastGauge = NAN;
+float legacyGauge = NAN;
 
 char currentCharacter = 'A';
 char currentLetter = 'A';
@@ -117,6 +118,7 @@ void restartCalibration() {
   calibratedRaw = false;
   calibratedOpamp = false;
   lastGauge = NAN;
+  legacyGauge = NAN;
   Serial.printf("INFO,CAL_START,config=%s,pump_must_be_off=1\n", configName());
 }
 
@@ -294,11 +296,16 @@ void processSampleTick() {
   }
 
   const uint32_t sequence = scanSequence++;
-  if (useRaw)
+  if (useRaw) {
     printReading(timestampMs, sequence, "raw", raw, baselineRaw, calibratedRaw);
-  if (useOpamp)
+    legacyGauge = calibratedRaw ? raw.absoluteKpa - baselineRaw : NAN;
+  }
+  if (useOpamp) {
     printReading(timestampMs, sequence, "opamp", opamp,
                  baselineOpamp, calibratedOpamp);
+    if (!useRaw) legacyGauge = calibratedOpamp
+        ? opamp.absoluteKpa - baselineOpamp : NAN;
+  }
 
   // Compatibility with Lab 1's suck_until_pressure.py parser:
   // it expects "P_gauge = <number> kPa", but is NOT a 100 Hz pump controller.
@@ -306,9 +313,9 @@ void processSampleTick() {
   const uint32_t nowMs = millis();
   if (static_cast<int32_t>(nowMs - nextLegacyMs) >= 0) {
     nextLegacyMs = nowMs + 500;
-    if (std::isfinite(lastGauge)) {
+    if (std::isfinite(legacyGauge)) {
       Serial.printf("LEGACY,P_gauge = %.1f kPa,source=%s\n",
-                    lastGauge, config == Config::Dual ? "raw" : configName());
+                    legacyGauge, config == Config::Dual ? "raw" : configName());
     }
   }
 }
